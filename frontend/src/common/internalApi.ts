@@ -12,7 +12,7 @@ const ErrorResponse = {
 
 export const _get = async(url: string) => {
   try {
-    const response = await axios.get(url, {
+    const response = await axios.get<BaseResponse>(url, {
       headers: {
         'Content-Type': 'application/json',
       },

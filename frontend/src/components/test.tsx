@@ -10,7 +10,7 @@ const Test: React.FC<TestProps> = ({
   return (
     <>
       <p>Hello, React!</p>
-      <p>{getMessage}</p>
+      <p>{getMessage.message}</p>
     </>
   )
 };

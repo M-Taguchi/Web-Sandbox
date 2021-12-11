@@ -4,8 +4,10 @@ class HelloApiHandler(Resource):
   def get(self):
     return {
       "resultStatus": "SUCCESS",
-      "message": "Hello Api Handler"
+      "body": {
+        "message": "Hello Api Handler"
       }
+    }
 
   def post(self):
     
@@ -17,17 +19,17 @@ class HelloApiHandler(Resource):
 
     # note, the post req from frontend needs to match the strings here (e.g. 'type and 'message')
     request_type = args["type"]
-    request_json = args["message"]
+    request_json = args["body"]
     # ret_status, ret_msg = ReturnData(request_type, request_json)
     # currently just returning the req straight
     ret_status = request_type
-    ret_msg = request_json
+    ret_msg = request_json["message"]
 
     if ret_msg:
       message = "Your Message Requested: {}".format(ret_msg)
     else:
       message = "No Msg"
     
-    respone = {"status": "Success", "message": message}
+    respone = {"status": "Success", "body": { "message": message }}
 
     return response

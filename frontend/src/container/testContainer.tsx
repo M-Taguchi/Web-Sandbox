@@ -5,12 +5,14 @@ import {_get} from "../common/internalApi";
 
 const TestContainer: React.FC = () => {
 
-  const response = _get('http://localhost:5000/flask/hello');
+  const getMessage = _get('http://localhost:5000/flask/hello').then(res => {
+    return res?.body
+  });
 
-  console.log(response);
+  console.log(getMessage)
 
   const props = {
-    getMessage: response.value
+    getMessage
   }
 
   return (
