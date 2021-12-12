@@ -10,7 +10,7 @@ def create_init(app):
     
 def user_create():
     # テストデータ
-    from test.data.user import users
+    from data.user import users
     for i in users:
         u  = User(name=i["name"])
         db.session.add(u)

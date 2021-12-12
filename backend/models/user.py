@@ -1,11 +1,8 @@
 from flask import jsonify, abort, request
 from flask_restful import Api, Resource, reqparse
-from flask_sqlalchemy import SQLAlchemy
+from database import db
 from datetime import datetime
-from app import ma
-
-db = SQLAlchemy()
-
+from marshmallow import Schema
 """
 ユーザモデル
 """
@@ -18,7 +15,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
 
-class UserSchema(ma.Schema):
+class UserSchema(Schema):
     class Meta:
         fields = ("id", "name")
 
@@ -50,3 +47,13 @@ class UserApi(Resource):
     ユーザ登録
     """
     users = request.json["users"]
+    for i in users:
+        u  = User(name=i["name"])
+        db.session.add(u)
+    db.session.commit()
+
+    return {
+      "resultStatus": "success",
+      "body": {
+      }
+    }
