@@ -1,7 +1,7 @@
 
 export interface User {
-  userName: string;
-  message: string;
+  id: number;
+  name: string;
 };
 
 export interface UserResponse extends BaseResponse {

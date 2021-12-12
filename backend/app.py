@@ -20,7 +20,6 @@ create_init(app)
 
 # デプロイ時にコメント化
 CORS(app)
-api = Api(app)
 
 @app.route("/", defaults={"path":""})
 def serve(path):

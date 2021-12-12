@@ -5,6 +5,7 @@ from datetime import datetime
 from marshmallow import Schema
 """
 ユーザモデル
+
 """
 class User(db.Model):
 
@@ -19,7 +20,7 @@ class UserSchema(Schema):
     class Meta:
         fields = ("id", "name")
 
-user_schema = UserSchema(many=True)
+user_schema = UserSchema(many=False)
 
 class UserApi(Resource):
   def get(self):
@@ -27,9 +28,9 @@ class UserApi(Resource):
     ユーザを1件取得
     """
     id = request.args.get("id")
-    result = User.query.filter_by(id=id).all()
-    if len(result) != 0: 
-        return jsonify({"user" : user_schema.dump(result)})
+    result = User.query.filter_by(id=id).one()
+    if result:
+        return jsonify({"status": "success", "body": {"user" : user_schema.dump(result)}})
     else:
         abort(404)
     # return {
@@ -47,6 +48,7 @@ class UserApi(Resource):
     ユーザ登録
     """
     users = request.json["users"]
+    print(users)
     for i in users:
         u  = User(name=i["name"])
         db.session.add(u)

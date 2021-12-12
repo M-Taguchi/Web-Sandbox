@@ -10,8 +10,8 @@ const Test: React.FC<TestProps> = ({
   return (
     <>
       <p>Hello, React!</p>
-      <p>{user.userName}さん、こんにちは</p>
-      <p>メッセージ：{user.message}</p>
+      <p>{user.name}さん、こんにちは</p>
+      <p>IDは{user.id}です</p>
     </>
   )
 };

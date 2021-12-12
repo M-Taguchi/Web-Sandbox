@@ -5,8 +5,8 @@ let status = "pending";
 let result: Object;
 let error: Error;
 
-export const _get = (url: string) => {
-  const suspender = axios.get(url).then((r: AxiosResponse<BaseResponse>) =>{
+export const _get = (url: string, params?: object) => {
+  const suspender = axios.get(url, {params: params}).then((r: AxiosResponse<BaseResponse>) =>{
     status = r.data.status;
     result = r.data.body;
   })
@@ -36,7 +36,7 @@ export const _post = async(url: string, data: object) => {
   });
 
   if (response.status !== 200) {
-    console.log("エラー！");
+    console.log("エラー");
     throw error;
   }
 
