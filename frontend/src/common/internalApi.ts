@@ -1,26 +1,44 @@
 import axios, { AxiosResponse } from "axios"
+import { BaseResponse } from "../types/internalApi"
 
-type BaseResponse = {
-  status: String;
-  body: object;
-}
+let status = "pending";
+let result: Object;
+let error: Error;
 
-const ErrorResponse = {
-  status: "error",
-  body: {},
-}
+export const _get = (url: string) => {
+  const suspender = axios.get(url).then((r: AxiosResponse<BaseResponse>) =>{
+    status = r.data.status;
+    result = r.data.body;
+  })
+  .catch((e: any) => {
+    status = "error";
+    error = e;
+  })
 
-export const _get = async(url: string) => {
-  try {
-    const response = await axios.get<BaseResponse>(url, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
-  } catch (e: any) {
-    if (e.response && e.response.status === 400) {
-      console.log("400 Error!!");
+  return {
+    read() {
+      if (status === "pending") {
+        throw suspender;
+      } else if (status === "error") {
+        throw error;
+      }
+      return result;
     }
   }
+};
+
+export const _post = async(url: string, data: object) => {
+  const response = await axios.post<BaseResponse>(url, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data,
+  });
+
+  if (response.status !== 200) {
+    console.log("エラー！");
+    throw error;
+  }
+
+  return response.data.body;
 };

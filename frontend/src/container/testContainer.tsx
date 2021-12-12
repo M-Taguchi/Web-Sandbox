@@ -1,18 +1,15 @@
-import { Suspense, lazy, useState, useEffect } from "react";
-
 import Test from "../components/test";
 import {_get} from "../common/internalApi";
+import { UserResponse } from "../types/user";
 
 const TestContainer: React.FC = () => {
 
-  const getMessage = _get('http://localhost:5000/flask/hello').then(res => {
-    return res?.body
-  });
+  const response: any = _get('http://localhost:5000/flask/hello').read();
 
-  console.log(getMessage)
+  const user = response.user
 
   const props = {
-    getMessage
+    user
   }
 
   return (

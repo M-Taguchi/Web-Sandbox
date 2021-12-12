@@ -1,16 +1,18 @@
 import react from "react";
+import { User} from "../types/user";
 
 type TestProps = {
-  getMessage?: any;
+  user: User;
 };
 
 const Test: React.FC<TestProps> = ({
-  getMessage
+  user
 }) => {
   return (
     <>
       <p>Hello, React!</p>
-      <p>{getMessage.message}</p>
+      <p>{user.userName}さん、こんにちは</p>
+      <p>メッセージ：{user.message}</p>
     </>
   )
 };

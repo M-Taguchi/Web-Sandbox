@@ -5,15 +5,17 @@ class HelloApiHandler(Resource):
     return {
       "resultStatus": "SUCCESS",
       "body": {
-        "message": "Hello Api Handler"
+        "user": {
+          "userName": "テスト太郎",
+          "message": "Hello Api Handler"
+        }
       }
     }
 
   def post(self):
-    
     parser = reqparse.RequestParser()
     parser.add_argument("type", type=str)
-    parser.add_argument("message", type=str)
+    parser.add_argument("user", type=str)
 
     args = parser.parse_args()
 
@@ -30,6 +32,6 @@ class HelloApiHandler(Resource):
     else:
       message = "No Msg"
     
-    respone = {"status": "Success", "body": { "message": message }}
+    respone = {"status": "success", "body": { "user": {"userName": "test", "message": message }}}
 
     return response
