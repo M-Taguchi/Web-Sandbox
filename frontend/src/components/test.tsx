@@ -1,4 +1,3 @@
-import react from "react";
 import { User} from "../types/user";
 
 type TestProps = {
