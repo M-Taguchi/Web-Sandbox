@@ -1,17 +1,15 @@
 import './App.css';
-import { Suspense, lazy } from "react";
-
-const TestContainer = lazy(() => import("./container/testContainer"))
+import { Suspense } from "react";
+import { theme, ChakraProvider } from '@chakra-ui/react'
+import TestContainer from './container/testContainer';
 
 function App() {
   return (
-    <>
-      <p>test</p>
+    <ChakraProvider theme={theme}>
       <Suspense fallback={<p>loading...</p>}>
         <TestContainer />
       </Suspense>
-    </>
-    
+    </ChakraProvider>
   );
 }
 
