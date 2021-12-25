@@ -11,6 +11,6 @@ def create_init(app):
 def user_create():
     # テストデータ
     from data.user import users
-    for i in users:
-        u  = User(name=i["name"])
+    for user in users:
+        u = User(name=user["name"])
         db.session.add(u)
