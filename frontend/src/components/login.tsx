@@ -57,9 +57,13 @@ const Test: React.FC<LoginProps> = ({ handleLogin }) => {
                   })}
                   placeholder="ユーザー名"
                 />
-                <FormErrorMessage>
-                  {errors.userName && errors.userName.message}
-                </FormErrorMessage>
+                {errors.userName ? (
+                  <FormErrorMessage mb={2}>
+                    {errors.userName.message}
+                  </FormErrorMessage>
+                ) : (
+                  <Box h={"21px"} mt={2} mb={2}></Box>
+                )}
               </FormControl>
               <FormControl isInvalid={errors.password}>
                 <FormLabel htmlFor="password">パスワード</FormLabel>
@@ -77,9 +81,13 @@ const Test: React.FC<LoginProps> = ({ handleLogin }) => {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <FormErrorMessage h={"40px"}>
-                  {errors.password && errors.password.message}
-                </FormErrorMessage>
+                {errors.password ? (
+                  <FormErrorMessage mb={2}>
+                    {errors.password.message}
+                  </FormErrorMessage>
+                ) : (
+                  <Box h={"21px"} mt={2} mb={2}></Box>
+                )}
               </FormControl>
               <Button
                 mt={4}
