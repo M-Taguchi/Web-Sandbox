@@ -6,11 +6,16 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 
 from database import init_db
-from init import create_init
-
+from init import create_init, jwt_init
 
 app = Flask(__name__, static_url_path="", static_folder="frontend/build")
+
+# CORS対策(デプロイ時にコメント化)
+CORS(app)
+
+# 設定読み込み
 app.config.from_object("config.Config")
+
 
 # DB初期化
 init_db(app)
@@ -18,8 +23,8 @@ api = Api(app)
 ma = Marshmallow(app)
 create_init(app)
 
-# デプロイ時にコメント化
-CORS(app)
+# JWT初期化
+jwt_init(app)
 
 @app.route("/", defaults={"path":""})
 def serve(path):
