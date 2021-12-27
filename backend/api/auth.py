@@ -11,8 +11,8 @@ class AuthLoginApi(Resource):
   ログイン
   """
   def post(self):
-    input_data = request.json
-    user = User.query.filter_by(name=input_data["name"]).first()
+    input_data = request.json["data"]
+    user = User.query.filter_by(userName=input_data["userName"]).first()
 
     if not user or not user.check_password(input_data["password"]):
       return jsonify({"status": "failure", "body": {"message" : "IDまたはパスワードに誤りがあります"}})

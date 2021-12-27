@@ -24,7 +24,7 @@ export const _get = (url: string, params?: object) => {
       } else if (status === "error") {
         throw error;
       }
-      return result;
+      return [status, result];
     },
   };
 };
@@ -42,5 +42,5 @@ export const _post = async (url: string, data: object) => {
     throw error;
   }
 
-  return response.data.body;
+  return [response.data.status, response.data.body];
 };

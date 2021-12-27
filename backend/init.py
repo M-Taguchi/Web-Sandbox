@@ -12,6 +12,6 @@ def user_create():
     # テストデータ
     from data.user import users
     for user in users:
-        u = User(name=user["name"])
+        u = User(userName=user["userName"])
         u.set_password(user["password"])
         db.session.add(u)

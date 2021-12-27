@@ -5,7 +5,7 @@ import { UserResponse } from "../types/user";
 const TestContainer: React.FC = () => {
   const response: any = _get("http://localhost:5000/user", { id: 1 }).read();
 
-  const user = response.user;
+  const user = response[0].user;
 
   const props = {
     user,

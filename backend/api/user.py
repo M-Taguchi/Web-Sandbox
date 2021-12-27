@@ -22,7 +22,7 @@ class UserApi(Resource):
     ユーザ登録
     """
     user = request.json["user"]
-    u = User(name=user["name"])
+    u = User(userName=user["userName"])
     db.session.add(u)
     db.session.commit()
 
