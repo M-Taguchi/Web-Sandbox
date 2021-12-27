@@ -37,5 +37,5 @@ def serve(path):
 
 api.add_resource(AuthLoginApi, "/auth/login")
 api.add_resource(AuthLogoutApi, "/auth/logout")
-api.add_resource(AuthRefreshApi, "/auth/refresh")
+# api.add_resource(AuthRefreshApi, "/auth/refresh")
 api.add_resource(UserApi, "/user")

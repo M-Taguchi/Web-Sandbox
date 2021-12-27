@@ -29,20 +29,20 @@ class AuthLoginApi(Resource):
 
     return res
 
-class AuthRefreshApi(Resource):
-  """
-  トークンの再発行
-  """
-  @jwt_required(refresh=True)
-  def post(self):
-    # ログイン時にセットしたユーザID
-    current_user_id = get_jwt_identity()
-    access_token = create_access_token(current_user_id)
+# class AuthRefreshApi(Resource):
+#   """
+#   トークンの再発行
+#   """
+#   @jwt_required(refresh=True)
+#   def post(self):
+#     # ログイン時にセットしたユーザID
+#     current_user_id = get_jwt_identity()
+#     access_token = create_access_token(current_user_id, fresh=False)
 
-    res = jsonify({"status": "success", "body": {}})
-    set_access_cookies(res, access_token)
+#     res = jsonify({"status": "success", "body": {}})
+#     set_access_cookies(res, access_token)
 
-    return res
+#     return res
 
 class AuthLogoutApi(Resource):
   """

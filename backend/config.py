@@ -22,7 +22,7 @@ class DevConfig:
     JWT_TOKEN_LOCATION = ["cookies"]
     # クッキーのpath属性
     JWT_ACCESS_COOKIE_PATH = "/api/"
-    JWT_REFRESH_COOKIE_PATH = "/api/auth/refresh"
+    # JWT_REFRESH_COOKIE_PATH = "/api/auth/refresh"
     # GET以外のときにCSRFトークンチェックを行うか
     JWT_COOKIE_CSRF_PROTECT = True
     # JWT署名鍵
