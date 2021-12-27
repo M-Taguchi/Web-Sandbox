@@ -1,5 +1,5 @@
 users = [
-    { "name" : "山田太郎"},
-    { "name" : "上田二郎"},
-    { "name" : "田中三郎"}
+    { "name" : "山田太郎", "password": "test"},
+    { "name" : "上田二郎", "password": "test"},
+    { "name" : "田中三郎", "password": "testtest"}
 ]

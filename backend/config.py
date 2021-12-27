@@ -19,7 +19,7 @@ class DevConfig:
     SQLALCHEMY_ECHO = False
 
     # Flask-JWT-Extended
-    JWT_TOKEN_LOCATION = ["cookie"]
+    JWT_TOKEN_LOCATION = ["cookies"]
     # クッキーのpath属性
     JWT_ACCESS_COOKIE_PATH = "/api/"
     JWT_REFRESH_COOKIE_PATH = "/api/auth/refresh"
@@ -27,7 +27,8 @@ class DevConfig:
     JWT_COOKIE_CSRF_PROTECT = True
     # JWT署名鍵
     JWT_SECRET_KEY = b"ChangeMe"
-
+    # CSRF対策
+    JWT_COOKIE_SAMESITE = "Strict"
 
 
 Config = DevConfig

@@ -1,61 +1,25 @@
-from flask import jsonify, abort, request
-from flask_restful import Api, Resource, reqparse
 from database import db
 from datetime import datetime
 from marshmallow import Schema
+from werkzeug.security import generate_password_hash, check_password_hash
 """
 ユーザモデル
-
 """
 class User(db.Model):
-
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(128), nullable=False)
+    password = db.Column(db.String(128), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
+  
+    def set_password(self, password):
+      self.password = generate_password_hash(password)
+    
+    def check_password(self, password):
+      return check_password_hash(self.password, password)
 
 class UserSchema(Schema):
     class Meta:
         fields = ("id", "name")
-
-user_schema = UserSchema(many=False)
-
-class UserApi(Resource):
-  def get(self):
-    """
-    ユーザを1件取得
-    """
-    id = request.args.get("id")
-    result = User.query.filter_by(id=id).one()
-    if result:
-        return jsonify({"status": "success", "body": {"user" : user_schema.dump(result)}})
-    else:
-        abort(404)
-    # return {
-    #   "resultStatus": "SUCCESS",
-    #   "body": {
-    #     "user": {
-    #       "userName": "テスト太郎",
-    #       "message": "Hello Api Handler"
-    #     }
-    #   }
-    # }
-
-  def post(self):
-    """
-    ユーザ登録
-    """
-    users = request.json["users"]
-    print(users)
-    for i in users:
-        u  = User(name=i["name"])
-        db.session.add(u)
-    db.session.commit()
-
-    return {
-      "resultStatus": "success",
-      "body": {
-      }
-    }
