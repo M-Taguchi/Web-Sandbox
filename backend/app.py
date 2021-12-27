@@ -14,12 +14,12 @@ from api.token import jwt_init
 
 app = Flask(__name__, static_url_path="", static_folder="frontend/build")
 
+# 設定読み込み
 app.config.from_object("config.Config")
 
 # CORS対策(デプロイ時にコメント化)
 CORS(app)
 
-# 設定読み込み
 
 
 # DB初期化
