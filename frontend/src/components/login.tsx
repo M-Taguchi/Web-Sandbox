@@ -21,9 +21,10 @@ import { useFormContext } from "react-hook-form";
 
 type LoginProps = {
   handleLogin: () => void;
+  handleJWTTest: () => void;
 };
 
-const Test: React.FC<LoginProps> = ({ handleLogin }) => {
+const Test: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -97,6 +98,7 @@ const Test: React.FC<LoginProps> = ({ handleLogin }) => {
               >
                 ログイン
               </Button>
+              <Button onClick={handleJWTTest}>JWTテスト</Button>
             </form>
           </Stack>
         </Flex>

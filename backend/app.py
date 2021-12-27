@@ -2,7 +2,7 @@ from flask import Flask, send_from_directory
 from flask_jwt_extended.utils import get_jwt_identity
 from flask_jwt_extended.view_decorators import jwt_required
 from flask_restful import Api, Resource
-from api.auth import AuthLoginApi, AuthLogoutApi
+from api.auth import AuthLoginApi, AuthApi, AuthLogoutApi
 from api.user import UserApi
 from flask_cors import CORS # デプロイ時にコメント化
 from flask_sqlalchemy import SQLAlchemy
@@ -35,7 +35,8 @@ jwt_init(app)
 def serve(path):
     return send_from_directory(app.static_folder,"index.html")
 
-api.add_resource(AuthLoginApi, "/auth/login")
-api.add_resource(AuthLogoutApi, "/auth/logout")
-# api.add_resource(AuthRefreshApi, "/auth/refresh")
-api.add_resource(UserApi, "/user")
+api.add_resource(AuthApi, "/api/auth")
+api.add_resource(AuthLoginApi, "/api/auth/login")
+api.add_resource(AuthLogoutApi, "/api/auth/logout")
+# api.add_resource(AuthRefreshApi, "/api/auth/refresh")
+api.add_resource(UserApi, "/api/user")

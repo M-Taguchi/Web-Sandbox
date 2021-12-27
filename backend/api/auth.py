@@ -6,6 +6,15 @@ from flask_restful import Resource
 from models.user import User, UserSchema
 from database import db
 
+class AuthApi(Resource):
+  """
+  JWT認証チェック
+  """
+  @jwt_required()
+  def post(self):
+    return 
+
+
 class AuthLoginApi(Resource):
   """
   ログイン
@@ -15,9 +24,9 @@ class AuthLoginApi(Resource):
     user = User.query.filter_by(userName=input_data["userName"]).first()
 
     if not user or not user.check_password(input_data["password"]):
-      return jsonify({"status": "failure", "body": {"message" : "IDまたはパスワードに誤りがあります"}})
+      return jsonify({"status": "failure", "code": 401, "message" : "IDまたはパスワードに誤りがあります", "body": {}})
 
-    res = jsonify({"status": "success", "body": {"user" : UserSchema(many=False).dump(user)}})
+    res = jsonify({"status": "success", "code": 200, "message": "ログインに成功しました", "body": {"user" : UserSchema(many=False).dump(user)}})
 
     # JWTの発行とクッキーへのセット(CSRFトークンも自動的にセットされる)
     access_token = create_access_token(user.id)

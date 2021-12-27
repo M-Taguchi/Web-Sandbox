@@ -5,6 +5,8 @@ let status = "pending";
 let result: Object;
 let error: Error;
 
+axios.defaults.withCredentials = true;
+
 export const _get = (url: string, params?: object) => {
   const suspender = axios
     .get(url, { params: params })
@@ -37,7 +39,7 @@ export const _post = async (url: string, data: object) => {
     data,
   });
 
-  if (response.status !== 200) {
+  if (response.data.code !== 200) {
     console.log("エラー");
     throw error;
   }
