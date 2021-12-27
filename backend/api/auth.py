@@ -20,12 +20,12 @@ class AuthLoginApi(Resource):
     res = jsonify({"status": "success", "body": {"user" : UserSchema(many=False).dump(user)}})
 
     # JWTの発行とクッキーへのセット(CSRFトークンも自動的にセットされる)
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(user.id)
     set_access_cookies(res, access_token)
 
     # リフレッシュトークンの保持
-    refresh_token = create_refresh_token(user.id)
-    set_refresh_cookies(res, refresh_token)
+    # refresh_token = create_refresh_token(user.id)
+    # set_refresh_cookies(res, refresh_token)
 
     return res
 

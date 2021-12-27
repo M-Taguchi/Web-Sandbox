@@ -2,7 +2,7 @@ from flask import Flask, send_from_directory
 from flask_jwt_extended.utils import get_jwt_identity
 from flask_jwt_extended.view_decorators import jwt_required
 from flask_restful import Api, Resource
-from api.auth import AuthLoginApi, AuthLogoutApi, AuthRefreshApi
+from api.auth import AuthLoginApi, AuthLogoutApi
 from api.user import UserApi
 from flask_cors import CORS # デプロイ時にコメント化
 from flask_sqlalchemy import SQLAlchemy
@@ -18,7 +18,7 @@ app = Flask(__name__, static_url_path="", static_folder="frontend/build")
 app.config.from_object("config.Config")
 
 # CORS対策(デプロイ時にコメント化)
-CORS(app)
+CORS(app,resources={"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
 
 
 
