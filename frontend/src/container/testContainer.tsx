@@ -25,7 +25,6 @@ const TestContainer: React.FC = () => {
   const handleLogout = () =>
     _post("http://localhost:5000/api/auth/logout", {}).then((response: any) => {
       localStorage.removeItem("accessCsrf");
-      // TODO:遷移先の変更
       navigate("/login");
     });
 
