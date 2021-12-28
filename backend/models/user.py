@@ -22,4 +22,4 @@ class User(db.Model):
 
 class UserSchema(Schema):
     class Meta:
-        fields = ("id", "user_name")
+        fields = ("id", "userName")

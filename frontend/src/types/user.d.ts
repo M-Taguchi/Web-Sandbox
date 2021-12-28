@@ -1,6 +1,6 @@
 export interface User {
   id: number;
-  name: string;
+  userName: string;
 }
 
 export interface UserResponse extends BaseResponse {

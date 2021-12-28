@@ -7,7 +7,7 @@ const TestContainer: React.FC = () => {
     id: 1,
   }).read();
 
-  const user = response[0].user;
+  const user = response[1].user;
 
   const props = {
     user,
