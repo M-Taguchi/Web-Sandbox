@@ -35,7 +35,9 @@ const AuthContainer: React.FC = () => {
     ).then((response: any) => {
       console.log(response);
     });
+
   const props = { handleLogin, handleJWTTest };
+
   return (
     <>
       <FormProvider {...methods}>
