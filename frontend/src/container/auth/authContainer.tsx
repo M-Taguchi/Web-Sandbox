@@ -20,6 +20,7 @@ const AuthContainer: React.FC = () => {
           console.log("ログインに失敗しました");
         } else {
           setJwtCsrf(response[1].accessCsrf);
+          localStorage.setItem("accessCsrf", response[1].accessCsrf);
           // TODO:遷移先の変更
           navigate("/test");
         }

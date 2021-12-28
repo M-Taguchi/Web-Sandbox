@@ -59,6 +59,6 @@ class AuthLogoutApi(Resource):
   ログアウト
   """
   def post(self):
-    res = jsonify({"status": "success", "body":{}})
+    res = jsonify({"status": "success", "code": 200, "message": "ログアウトに成功しました", "body":{}})
     unset_jwt_cookies(res)
     return res

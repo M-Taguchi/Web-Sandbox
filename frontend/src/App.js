@@ -17,7 +17,11 @@ export const AuthContext = createContext("Auth Context");
 export const AuthProvider = AuthContext.Provider;
 
 function App() {
-  const [jwtCsrf, setJwtCsrf] = useState("");
+  const [jwtCsrf, setJwtCsrf] = useState(
+    localStorage.getItem("accessCsrf") || ""
+  );
+
+  // setJwtCsrf(localStorage.getItem("accessCsrf"));
 
   // const Private = () => {
   //   const [isAuth, setIsAuth] = useState(false);

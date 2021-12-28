@@ -32,12 +32,17 @@ export const _get = (url: string, params?: object) => {
 };
 
 export const _post = async (url: string, data: object, addHeaders?: object) => {
-  const response = await axios.post<BaseResponse>(url, data, {
-    headers: {
-      "Content-Type": "application/json",
-      ...addHeaders,
-    },
-  });
+  const response = await axios
+    .post<BaseResponse>(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+        ...addHeaders,
+      },
+    })
+    .catch((e: any) => {
+      console.log("エラー");
+      throw error;
+    });
 
   if (response.data.code !== 200) {
     console.log("エラー");
