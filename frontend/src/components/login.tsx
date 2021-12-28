@@ -98,7 +98,9 @@ const Test: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
               >
                 ログイン
               </Button>
-              <Button onClick={handleJWTTest}>JWTテスト</Button>
+              <Button mt={4} colorScheme="red" onClick={handleJWTTest}>
+                JWTテスト
+              </Button>
             </form>
           </Stack>
         </Flex>

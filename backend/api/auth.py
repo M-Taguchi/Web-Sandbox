@@ -1,6 +1,6 @@
 from os import access
 from flask import request, jsonify
-from flask_jwt_extended.utils import create_access_token, create_refresh_token, get_jwt_identity, set_access_cookies, set_refresh_cookies, unset_jwt_cookies
+from flask_jwt_extended.utils import create_access_token, create_refresh_token, get_csrf_token, get_jwt_identity, set_access_cookies, set_refresh_cookies, unset_jwt_cookies
 from flask_jwt_extended.view_decorators import jwt_required
 from flask_restful import Resource
 from models.user import User, UserSchema
@@ -12,7 +12,7 @@ class AuthApi(Resource):
   """
   @jwt_required()
   def post(self):
-    return 
+    return jsonify({"status": "success", "code": 200, "message" : "", "body": {}})
 
 
 class AuthLoginApi(Resource):
@@ -20,20 +20,21 @@ class AuthLoginApi(Resource):
   ログイン
   """
   def post(self):
-    input_data = request.json["data"]
+    input_data = request.json
     user = User.query.filter_by(userName=input_data["userName"]).first()
 
     if not user or not user.check_password(input_data["password"]):
       return jsonify({"status": "failure", "code": 401, "message" : "IDまたはパスワードに誤りがあります", "body": {}})
 
-    res = jsonify({"status": "success", "code": 200, "message": "ログインに成功しました", "body": {"user" : UserSchema(many=False).dump(user)}})
-
-    # JWTの発行とクッキーへのセット(CSRFトークンも自動的にセットされる)
+    # JWTの発行
     access_token = create_access_token(user.id)
-    set_access_cookies(res, access_token)
-
     # リフレッシュトークンの保持
     # refresh_token = create_refresh_token(user.id)
+
+    res = jsonify({"status": "success", "code": 200, "message": "ログインに成功しました", "body": {"user" : UserSchema(many=False).dump(user), "accessCsrf": get_csrf_token(access_token)}})
+
+    # クッキーへのセット(CSRFトークンも自動的にセットされる)
+    set_access_cookies(res, access_token)
     # set_refresh_cookies(res, refresh_token)
 
     return res

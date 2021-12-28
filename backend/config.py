@@ -29,6 +29,8 @@ class DevConfig:
     JWT_SECRET_KEY = b"ChangeMe"
     # CSRF対策
     JWT_COOKIE_SAMESITE = "Strict"
+    # 二重送信対策
+    JWT_CSRF_IN_COOKIES = False
 
 
 Config = DevConfig

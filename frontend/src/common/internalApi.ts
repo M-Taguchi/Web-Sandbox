@@ -31,12 +31,12 @@ export const _get = (url: string, params?: object) => {
   };
 };
 
-export const _post = async (url: string, data: object) => {
-  const response = await axios.post<BaseResponse>(url, {
+export const _post = async (url: string, data: object, addHeaders?: object) => {
+  const response = await axios.post<BaseResponse>(url, data, {
     headers: {
       "Content-Type": "application/json",
+      ...addHeaders,
     },
-    data,
   });
 
   if (response.data.code !== 200) {
