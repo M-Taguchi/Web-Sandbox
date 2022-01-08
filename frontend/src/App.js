@@ -1,5 +1,5 @@
 import "./App.css";
-import { theme, ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import TestContainer from "./container/testContainer";
 import AuthContainer from "./container/auth/authContainer";
 import { Suspense } from "react";
@@ -11,6 +11,7 @@ import {
 import PrivateRoute from "./container/auth/privateRoute";
 import { AuthProvider } from "./hooks/useAuth"
 import { ApiProvider } from "./hooks/useInternalApi";
+import theme from "./theme";
 
 function App() {
   return (

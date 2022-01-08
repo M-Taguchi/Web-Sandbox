@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useInternalApi } from "../../hooks/useInternalApi";
+import AppbarContainer from "../appbarContainer";
 
 const PrivateRoute: React.FC = () => {
   const { _post } = useInternalApi();
@@ -27,6 +28,7 @@ const PrivateRoute: React.FC = () => {
 
   return (
     <>
+      <AppbarContainer />
       <Outlet />
     </>
   );

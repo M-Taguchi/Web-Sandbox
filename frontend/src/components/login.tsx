@@ -1,20 +1,16 @@
 import { useState } from "react";
 import {
   Box,
-  Grid,
-  VStack,
   Input,
   InputGroup,
   InputRightElement,
   Button,
-  Container,
   Heading,
   Flex,
   FormControl,
   FormLabel,
   FormErrorMessage,
   Stack,
-  Spacer,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useFormContext } from "react-hook-form";
@@ -24,7 +20,7 @@ type LoginProps = {
   handleJWTTest: () => void;
 };
 
-const Test: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
+const Login: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -109,4 +105,4 @@ const Test: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
   );
 };
 
-export default Test;
+export default Login;
