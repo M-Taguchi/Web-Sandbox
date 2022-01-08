@@ -3,7 +3,6 @@ import {
   Box,
   Input,
   Button,
-  useDisclosure,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -19,12 +18,10 @@ type AppbarProps = {
 
 const Appbar: React.FC = () => {
   const [ isOpen, setIsOpen ] = useState(false);
-  const { onOpen, onClose } = useDisclosure();
 
   return (
-    <Box>
+    <Box p={4}>
       <Button colorScheme="teal" onClick={() => {
-          onOpen();
           setIsOpen(true);
         }}>
         <HamburgerIcon/>
@@ -35,14 +32,12 @@ const Appbar: React.FC = () => {
           isOpen={isOpen}
           placement="left"
           onClose={() => {
-            onClose();
             setIsOpen(false);
           }}
         >
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton onClick={() => {
-            onClose();
             setIsOpen(false);
           }}/>
             <DrawerHeader>Create your account</DrawerHeader>
