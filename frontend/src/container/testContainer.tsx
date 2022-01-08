@@ -1,30 +1,30 @@
 import Test from "../components/test";
-import { _get, _post } from "../common/internalApi";
-import { UserResponse } from "../types/user";
-import { useContext } from "react";
-import { AuthContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { useInternalApi } from "../hooks/useInternalApi";
+import { useToast } from "@chakra-ui/react";
 
 const TestContainer: React.FC = () => {
-  const { jwtCsrf, setJwtCsrf } = useContext<any>(AuthContext);
+  const { _post, _get } = useInternalApi();
   const navigate = useNavigate();
+  const toast = useToast();
 
-  const response: any = _get("http://localhost:5000/api/user", {
+  const response: any = _get("/user", {
     id: 1,
   }).read();
 
   const handleJwtTest = () =>
     _post(
-      "http://localhost:5000/api/auth",
-      {},
-      { "X-CSRF-TOKEN": jwtCsrf }
+      "/auth",
     ).then((response: any) => {
       console.log(response);
+    }).catch(() => {
+      navigate("/login")
     });
 
   const handleLogout = () =>
-    _post("http://localhost:5000/api/auth/logout", {}).then((response: any) => {
+    _post("/auth/logout", {}).then((response: any) => {
       localStorage.removeItem("accessCsrf");
+      toast({title: "ログアウトしました", position: "top", status: "success"})
       navigate("/login");
     });
 

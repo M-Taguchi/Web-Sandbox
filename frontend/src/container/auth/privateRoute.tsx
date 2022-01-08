@@ -1,19 +1,16 @@
-import Login from "../../components/login";
-import { useForm, FormProvider } from "react-hook-form";
-import { _post } from "../../common/internalApi";
-import { AuthContext } from "../../App";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useInternalApi } from "../../hooks/useInternalApi";
 
 const PrivateRoute: React.FC = () => {
-  const { jwtCsrf } = useContext<any>(AuthContext);
+  const { _post } = useInternalApi();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   // HACK: 上手くいっているか不明なので要検討
   useEffect(() => {
     const jwtCheck = () =>
-      _post("http://localhost:5000/api/auth", {}, { "X-CSRF-TOKEN": jwtCsrf })
+      _post("/auth")
         .then((response: any) => {
           console.log(response);
           setIsLoading(false);

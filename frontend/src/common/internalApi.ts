@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { useAuth } from "../hooks/useAuth";
 import { BaseResponse } from "../types/internalApi";
 
 let status = "pending";
