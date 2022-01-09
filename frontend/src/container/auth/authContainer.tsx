@@ -15,31 +15,39 @@ const AuthContainer: React.FC = () => {
 
   // 認証系の処理を書く
   const handleLogin = handleSubmit((data) =>
-    _post("/auth/login", data).then(
-      (response: any) => {
-        if (response[0] === "failure") {
-          // TODO:失敗時のスナックバー表示など
-          toast({title: "ログインに失敗しました", position: "top", status: "error"})
-          console.log("ログインに失敗しました");
-        } else {
-          setJwtCsrf(response[1].accessCsrf);
-          localStorage.setItem("accessCsrf", response[1].accessCsrf);
-          toast({title: "ログインしました", position: "top", status: "success"})
-          // TODO:遷移先の変更
-          navigate("/test");
-        }
+    _post("/auth/login", data).then((response: any) => {
+      if (response[0] === "failure") {
+        // TODO:失敗時のスナックバー表示など
+        toast({
+          title: "ログインに失敗しました",
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+        console.log("ログインに失敗しました");
+      } else {
+        setJwtCsrf(response[1].accessCsrf);
+        localStorage.setItem("accessCsrf", response[1].accessCsrf);
+        toast({
+          title: "ログインしました",
+          position: "top",
+          status: "success",
+          isClosable: true,
+        });
+        // TODO:遷移先の変更
+        navigate("/test");
       }
-    )
+    })
   );
 
   const handleJWTTest = () =>
-    _post(
-      "/auth",
-    ).then((response: any) => {
-      console.log(response);
-    }).catch(() => {
-      navigate("/login")
-    });;
+    _post("/auth")
+      .then((response: any) => {
+        console.log(response);
+      })
+      .catch(() => {
+        navigate("/login");
+      });
 
   const props = { handleLogin, handleJWTTest };
 

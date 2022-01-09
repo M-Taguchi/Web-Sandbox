@@ -11,9 +11,10 @@ import {
   FormLabel,
   FormErrorMessage,
   Stack,
+  Icon,
 } from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useFormContext } from "react-hook-form";
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
 type LoginProps = {
   handleLogin: () => void;
@@ -73,8 +74,12 @@ const Login: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
                     type={show ? "text" : "password"}
                   />
                   <InputRightElement>
-                    <Button onClick={handleClick}>
-                      {show ? <ViewIcon /> : <ViewOffIcon />}
+                    <Button onClick={handleClick} variant={"ghost"}>
+                      {show ? (
+                        <Icon as={MdVisibility} w={6} h={6} />
+                      ) : (
+                        <Icon as={MdVisibilityOff} w={6} h={6} />
+                      )}
                     </Button>
                   </InputRightElement>
                 </InputGroup>

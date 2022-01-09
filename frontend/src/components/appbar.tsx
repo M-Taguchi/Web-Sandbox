@@ -1,41 +1,40 @@
-import { HamburgerIcon, SearchIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Input,
   Button,
   Drawer,
   DrawerBody,
-  DrawerCloseButton,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Link,
-  Stack,
   Flex,
   InputGroup,
   InputLeftElement,
   Text,
   Icon,
+  CloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { MdHome, MdSearch } from "react-icons/md";
+import { MdClose, MdHome, MdLogout, MdMenu, MdSearch } from "react-icons/md";
 
-type AppbarProps = {};
+type AppbarProps = {
+  handleLogout: () => void;
+};
 
-const Appbar: React.FC = () => {
+const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Box p={4} bg="teal.300">
+    <Flex justifyContent={"space-between"} p={4} bg="teal.300">
       <Button
         colorScheme="teal"
         onClick={() => {
           setIsOpen(true);
         }}
       >
-        <HamburgerIcon />
+        <Icon as={MdMenu} w={6} h={6} />
       </Button>
       {/* TODO: アンマウント時のアニメーション追加 */}
       {isOpen && (
@@ -48,13 +47,14 @@ const Appbar: React.FC = () => {
         >
           <DrawerOverlay />
           <DrawerContent>
-            <DrawerHeader>
-              メニュー
-              <DrawerCloseButton
+            <DrawerHeader display={"flex"} justifyContent={"right"} p={2}>
+              <CloseButton
                 onClick={() => {
                   setIsOpen(false);
                 }}
-              />
+              >
+                <Icon as={MdClose} w={6} h={6} />
+              </CloseButton>
             </DrawerHeader>
 
             <DrawerBody>
@@ -123,7 +123,14 @@ const Appbar: React.FC = () => {
           </DrawerContent>
         </Drawer>
       )}
-    </Box>
+      <Button
+        leftIcon={<Icon as={MdLogout} w={6} h={6} />}
+        colorScheme="blue"
+        onClick={handleLogout}
+      >
+        ログアウト
+      </Button>
+    </Flex>
   );
 };
 
