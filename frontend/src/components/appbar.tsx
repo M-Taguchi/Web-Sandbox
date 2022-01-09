@@ -27,7 +27,15 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Flex justifyContent={"space-between"} p={4} bg="teal.300">
+    <Flex
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      p={4}
+      h={20}
+      bg="teal.300"
+      w={"100vw"}
+      position={"fixed"}
+    >
       <Button
         colorScheme="teal"
         onClick={() => {

@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useInternalApi } from "../../hooks/useInternalApi";
@@ -29,7 +30,10 @@ const PrivateRoute: React.FC = () => {
   return (
     <>
       <AppbarContainer />
-      <Outlet />
+      {/* Appbarのサイズ分コンテンツを下に */}
+      <Box pt={20}>
+        <Outlet />
+      </Box>
     </>
   );
 };

@@ -1,15 +1,11 @@
 import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 import TestContainer from "./container/testContainer";
 import AuthContainer from "./container/auth/authContainer";
 import { Suspense } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./container/auth/privateRoute";
-import { AuthProvider } from "./hooks/useAuth"
+import { AuthProvider } from "./hooks/useAuth";
 import { ApiProvider } from "./hooks/useInternalApi";
 import theme from "./theme";
 
