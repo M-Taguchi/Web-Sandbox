@@ -22,6 +22,7 @@ type FormTextFieldProps = {
   pattern?: ValidationRule<RegExp>;
   inputLeftElement?: ReactElement;
   inputRightElement?: ReactElement;
+  isValidate?: boolean;
 };
 
 const FormTextField: React.FC<FormTextFieldProps> = ({
@@ -35,6 +36,7 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
   pattern,
   inputLeftElement,
   inputRightElement,
+  isValidate = true,
 }) => {
   const {
     register,
@@ -71,11 +73,12 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
             <InputRightElement>{inputRightElement}</InputRightElement>
           )}
         </InputGroup>
-        {errors[name] ? (
-          <FormErrorMessage mb={2}>{errors[name].message}</FormErrorMessage>
-        ) : (
-          <Box h={"21px"} mt={2} mb={2}></Box>
-        )}
+        {isValidate &&
+          (errors[name] ? (
+            <FormErrorMessage mb={2}>{errors[name].message}</FormErrorMessage>
+          ) : (
+            <Box h={"21px"} mt={2} mb={2}></Box>
+          ))}
       </FormControl>
     </>
   );
