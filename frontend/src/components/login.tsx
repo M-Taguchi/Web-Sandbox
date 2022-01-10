@@ -1,20 +1,7 @@
-import { useState } from "react";
-import {
-  Box,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Button,
-  Heading,
-  Flex,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Stack,
-  Icon,
-} from "@chakra-ui/react";
+import { Box, Button, Heading, Flex, Stack } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
-import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import FormTextField from "./atoms/FormTextField";
+import FormPasswordField from "./atoms/FormPasswordField";
 
 type LoginProps = {
   handleLogin: () => void;
@@ -22,12 +9,8 @@ type LoginProps = {
 };
 
 const Login: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
-
   const {
-    register,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useFormContext();
 
   return (
@@ -47,50 +30,16 @@ const Login: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
           <Heading textAlign="center">ユーザーログイン</Heading>
           <Stack justifyContent="center" spacing={8}>
             <form onSubmit={handleLogin}>
-              <FormControl isInvalid={errors.userName}>
-                <FormLabel htmlFor="userName">ユーザー名</FormLabel>
-                <Input
-                  {...register("userName", {
-                    maxLength: { value: 20, message: "上限は20文字です" },
-                  })}
-                  placeholder="ユーザー名"
-                />
-                {errors.userName ? (
-                  <FormErrorMessage mb={2}>
-                    {errors.userName.message}
-                  </FormErrorMessage>
-                ) : (
-                  <Box h={"21px"} mt={2} mb={2}></Box>
-                )}
-              </FormControl>
-              <FormControl isInvalid={errors.password}>
-                <FormLabel htmlFor="password">パスワード</FormLabel>
-                <InputGroup>
-                  <Input
-                    {...register("password", {
-                      maxLength: { value: 20, message: "上限は20文字です" },
-                    })}
-                    placeholder="パスワード"
-                    type={show ? "text" : "password"}
-                  />
-                  <InputRightElement>
-                    <Button onClick={handleClick} variant={"ghost"}>
-                      {show ? (
-                        <Icon as={MdVisibility} w={6} h={6} />
-                      ) : (
-                        <Icon as={MdVisibilityOff} w={6} h={6} />
-                      )}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-                {errors.password ? (
-                  <FormErrorMessage mb={2}>
-                    {errors.password.message}
-                  </FormErrorMessage>
-                ) : (
-                  <Box h={"21px"} mt={2} mb={2}></Box>
-                )}
-              </FormControl>
+              <FormTextField
+                name={"userName"}
+                label={"ユーザー名"}
+                maxLength={20}
+              />
+              <FormPasswordField
+                name={"password"}
+                label={"パスワード"}
+                maxLength={20}
+              />
               <Button
                 mt={4}
                 colorScheme="teal"

@@ -12,12 +12,12 @@ import {
   InputGroup,
   InputLeftElement,
   Text,
-  Icon,
   CloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { MdClose, MdHome, MdLogout, MdMenu, MdSearch } from "react-icons/md";
+import Icon from "./atoms/Icon";
 
 type AppbarProps = {
   handleLogout: () => void;
@@ -42,8 +42,9 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
           setIsOpen(true);
         }}
       >
-        <Icon as={MdMenu} w={6} h={6} />
+        <Icon icon={MdMenu} />
       </Button>
+      {/* メニュー */}
       {/* TODO: アンマウント時のアニメーション追加 */}
       {isOpen && (
         <Drawer
@@ -61,7 +62,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
                   setIsOpen(false);
                 }}
               >
-                <Icon as={MdClose} w={6} h={6} />
+                <Icon icon={MdClose} />
               </CloseButton>
             </DrawerHeader>
 
@@ -75,7 +76,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
               >
                 <InputGroup>
                   <InputLeftElement pointerEvents="none">
-                    <Icon as={MdSearch} w={6} h={6} />
+                    <Icon icon={MdSearch} />
                   </InputLeftElement>
                   <Input placeholder="検索" mb={2} />
                 </InputGroup>
@@ -90,7 +91,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
                   to="/test"
                 >
                   <Flex gap={3}>
-                    <Icon as={MdHome} w={6} h={6} />
+                    <Icon icon={MdHome} />
                     <Text>ホーム</Text>
                   </Flex>
                 </Link>
@@ -105,7 +106,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
                   to="/test"
                 >
                   <Flex gap={3}>
-                    <Icon as={MdHome} w={6} h={6} />
+                    <Icon icon={MdHome} />
                     <Text>どっか</Text>
                   </Flex>
                 </Link>
@@ -120,7 +121,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
                   to="/test"
                 >
                   <Flex gap={3}>
-                    <Icon as={MdHome} w={6} h={6} />
+                    <Icon icon={MdHome} />
                     <Text>異次元</Text>
                   </Flex>
                 </Link>
@@ -132,7 +133,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
         </Drawer>
       )}
       <Button
-        leftIcon={<Icon as={MdLogout} w={6} h={6} />}
+        leftIcon={<Icon icon={MdLogout} />}
         colorScheme="blue"
         onClick={handleLogout}
       >

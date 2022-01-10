@@ -20,6 +20,9 @@ const PrivateRoute: React.FC = () => {
         .catch(() => {
           setIsLoading(false);
           navigate("/login");
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     jwtCheck();
   }, []);

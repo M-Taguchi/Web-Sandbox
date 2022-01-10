@@ -1,11 +1,11 @@
 import { useToast } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Login from "../../components/login";
-import { useAuth } from "../../hooks/useAuth";
-import { useInternalApi } from "../../hooks/useInternalApi";
+import Login from "../components/login";
+import { useAuth } from "../hooks/useAuth";
+import { useInternalApi } from "../hooks/useInternalApi";
 
-const AuthContainer: React.FC = () => {
+const LoginContainer: React.FC = () => {
   const methods = useForm();
   const { handleSubmit } = methods;
   const { setJwtCsrf } = useAuth();
@@ -15,17 +15,8 @@ const AuthContainer: React.FC = () => {
 
   // 認証系の処理を書く
   const handleLogin = handleSubmit((data) =>
-    _post("/auth/login", data).then((response: any) => {
-      if (response[0] === "failure") {
-        // TODO:失敗時のスナックバー表示など
-        toast({
-          title: "ログインに失敗しました",
-          position: "top",
-          status: "error",
-          isClosable: true,
-        });
-        console.log("ログインに失敗しました");
-      } else {
+    _post("/auth/login", data)
+      .then((response: any) => {
         setJwtCsrf(response[1].accessCsrf);
         localStorage.setItem("accessCsrf", response[1].accessCsrf);
         toast({
@@ -35,9 +26,16 @@ const AuthContainer: React.FC = () => {
           isClosable: true,
         });
         // TODO:遷移先の変更
-        navigate("/test");
-      }
-    })
+        navigate("/");
+      })
+      .catch(() => {
+        toast({
+          title: "ログインに失敗しました",
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+      })
   );
 
   const handleJWTTest = () =>
@@ -60,4 +58,4 @@ const AuthContainer: React.FC = () => {
   );
 };
 
-export default AuthContainer;
+export default LoginContainer;
