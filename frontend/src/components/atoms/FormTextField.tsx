@@ -7,6 +7,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Textarea,
 } from "@chakra-ui/react";
 import { ReactElement } from "react";
 import { useFormContext, Validate, ValidationRule } from "react-hook-form";
@@ -15,6 +16,8 @@ type FormTextFieldProps = {
   name: string;
   label?: string;
   placeholder?: string;
+  defaultValue?: string;
+  multiple?: boolean;
   minLength?: number;
   maxLength?: number;
   required?: boolean;
@@ -29,6 +32,8 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
   name,
   label,
   placeholder,
+  multiple = false,
+  defaultValue = "",
   minLength,
   maxLength,
   required,
@@ -52,22 +57,43 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
             <InputLeftElement>{inputLeftElement}</InputLeftElement>
           )}
 
-          <Input
-            {...register(name, {
-              minLength: minLength && {
-                value: minLength,
-                message: `${minLength}文字以下で入力してください`,
-              },
-              maxLength: maxLength && {
-                value: maxLength,
-                message: `${maxLength}文字以上で入力してください`,
-              },
-              required: required && "必須項目です",
-              pattern: pattern,
-              validate: validate,
-            })}
-            placeholder={placeholder}
-          />
+          {multiple ? (
+            <Textarea
+              {...register(name, {
+                minLength: minLength && {
+                  value: minLength,
+                  message: `${minLength}文字以下で入力してください`,
+                },
+                maxLength: maxLength && {
+                  value: maxLength,
+                  message: `${maxLength}文字以上で入力してください`,
+                },
+                required: required && "必須項目です",
+                pattern: pattern,
+                validate: validate,
+              })}
+              placeholder={placeholder}
+              defaultValue={defaultValue}
+            />
+          ) : (
+            <Input
+              {...register(name, {
+                minLength: minLength && {
+                  value: minLength,
+                  message: `${minLength}文字以下で入力してください`,
+                },
+                maxLength: maxLength && {
+                  value: maxLength,
+                  message: `${maxLength}文字以上で入力してください`,
+                },
+                required: required && "必須項目です",
+                pattern: pattern,
+                validate: validate,
+              })}
+              placeholder={placeholder}
+              defaultValue={defaultValue}
+            />
+          )}
 
           {inputRightElement && (
             <InputRightElement>{inputRightElement}</InputRightElement>
