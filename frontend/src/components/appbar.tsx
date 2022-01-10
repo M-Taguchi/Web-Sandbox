@@ -88,7 +88,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
                   h={12}
                   _hover={{ bg: "gray.100" }}
                   as={ReactRouterLink}
-                  to="/test"
+                  to="/"
                 >
                   <Flex gap={3}>
                     <Icon icon={MdHome} />
@@ -103,7 +103,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
                   pl={1}
                   _hover={{ bg: "gray.100" }}
                   as={ReactRouterLink}
-                  to="/test"
+                  to="/"
                 >
                   <Flex gap={3}>
                     <Icon icon={MdHome} />
@@ -118,7 +118,7 @@ const Appbar: React.FC<AppbarProps> = ({ handleLogout }) => {
                   pl={1}
                   _hover={{ bg: "gray.100" }}
                   as={ReactRouterLink}
-                  to="/test"
+                  to="/"
                 >
                   <Flex gap={3}>
                     <Icon icon={MdHome} />
