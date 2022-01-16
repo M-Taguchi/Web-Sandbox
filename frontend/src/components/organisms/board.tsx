@@ -8,6 +8,7 @@ import {
   CloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { MdAdd, MdClose } from "react-icons/md";
 import { CardProps } from "../../types/card";
 import Card from "../atoms/Card";
@@ -19,15 +20,29 @@ import DeleteModal from "../molecules/modal/deleteModal";
 type BoardProps = {
   title?: string;
   cards?: Array<CardProps>;
+  categoryId: number;
+  handlers: {
+    handleCreateCard: () => void;
+  };
 };
 
-const Board: React.FC<BoardProps> = ({ title, cards }) => {
+const Board: React.FC<BoardProps> = ({
+  title,
+  cards,
+  categoryId,
+  handlers,
+  ...props
+}) => {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
   const onOpenDeleteModal = () => setIsOpenDeleteModal(true);
   const onOpenCreateModal = () => setIsOpenCreateModal(true);
   const onCloseDeleteModal = () => setIsOpenDeleteModal(false);
   const onCloseCreateModal = () => setIsOpenCreateModal(false);
+
+  const { handleCreateCard } = handlers;
+
+  const { register } = useFormContext();
 
   return (
     <>
@@ -86,20 +101,24 @@ const Board: React.FC<BoardProps> = ({ title, cards }) => {
           </Button>
           {isOpenCreateModal && (
             <CreateModal
-              header={"ボードの作成"}
+              header={"カードの作成"}
               content={
                 <>
-                  <FormTextField name={"header"} label={"ヘッダー"} />
+                  <FormTextField name={"cardTitle"} label={"タイトル"} />
                   <FormTextField
-                    name={"content"}
+                    name={"cardContent"}
                     label={"内容"}
                     multiple={true}
+                  />
+                  <input
+                    type="hidden"
+                    {...register("categoryId", { value: categoryId })}
                   />
                 </>
               }
               isOpen={isOpenCreateModal}
               onClose={onCloseCreateModal}
-              onSubmit={() => alert("作成！")}
+              onSubmit={handleCreateCard}
             />
           )}
         </VStack>

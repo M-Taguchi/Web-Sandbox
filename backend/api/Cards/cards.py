@@ -25,7 +25,7 @@ class CardsApi(Resource):
     """
     payload = request.json["card"]
     # レコードの登録
-    card = Card(cardTitle=payload["cardTitle"], cardContent=payload["catdContent"], categoryId=payload["categoryId"])
+    card = Card(cardTitle=payload["cardTitle"], cardContent=payload["cardContent"], categoryId=payload["categoryId"])
     db.session.add(card)
     db.session.commit()
 

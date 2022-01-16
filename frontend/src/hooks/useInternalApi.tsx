@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
-import { createContext, useContext } from 'react';
-import { BaseResponse } from '../types/internalApi';
-import { useAuth } from "./useAuth"
+import axios, { AxiosResponse } from "axios";
+import { createContext, useContext } from "react";
+import { BaseResponse } from "../types/internalApi";
+import { useAuth } from "./useAuth";
 
 type ApiContext = {
   // TODO: any修正
@@ -11,7 +11,7 @@ type ApiContext = {
 
 const defaultContext: ApiContext = {
   _post: () => [],
-  _get: () => []
+  _get: () => [],
 };
 
 const apiContext = createContext<ApiContext>(defaultContext);
@@ -23,7 +23,7 @@ let error: Error;
 
 // TODO: 以下のaxiosの設定を環境変数に変更
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:5000/api"
+axios.defaults.baseURL = "http://localhost:5000/api";
 
 export const ApiProvider: React.FC = ({ children }) => {
   const { jwtCsrf } = useAuth();
@@ -39,7 +39,7 @@ export const ApiProvider: React.FC = ({ children }) => {
         status = "error";
         error = e;
       });
-  
+
     return {
       read() {
         if (status === "pending") {
@@ -51,7 +51,7 @@ export const ApiProvider: React.FC = ({ children }) => {
       },
     };
   };
-  
+
   const _post = async (url: string, data?: object, addHeaders?: object) => {
     const response = await axios
       .post<BaseResponse>(url, data, {
@@ -65,12 +65,12 @@ export const ApiProvider: React.FC = ({ children }) => {
         console.log("エラー");
         throw error;
       });
-  
-    if (response.data.code !== 200) {
-      console.log("エラー");
-      throw error;
-    }
-  
+
+    // if (response.data.code !== 200) {
+    //   console.log("エラー");
+    //   throw error;
+    // }
+
     return [response.data.status, response.data.body];
   };
 

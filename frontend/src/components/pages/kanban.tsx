@@ -4,9 +4,12 @@ import Board from "../organisms/board";
 
 type KanbanProps = {
   categorys: Array<Category>;
+  handlers: {
+    handleCreateCard: () => void;
+  };
 };
 
-const Kanban: React.FC<KanbanProps> = ({ categorys }) => {
+const Kanban: React.FC<KanbanProps> = ({ categorys, ...props }) => {
   return (
     <Flex>
       {categorys.map((category: Category, index: number) => {
@@ -15,6 +18,8 @@ const Kanban: React.FC<KanbanProps> = ({ categorys }) => {
             key={index}
             title={category.categoryName}
             cards={category.cards}
+            categoryId={category.categoryId}
+            {...props}
           />
         );
       })}
