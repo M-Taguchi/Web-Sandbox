@@ -8,7 +8,8 @@ class Card(db.Model):
     __tablename__ = 'cards'
 
     cardId = db.Column(db.Integer, primary_key=True)
-    cardTitle = db.Column(db.String(128), nullable=False)
+    cardTitle = db.Column(db.String(32), nullable=False)
+    cardContent = db.Column(db.String(256), nullable=False)
     categoryId = db.Column(db.Integer, db.ForeignKey('categorys.categoryId'), nullable=False)
     cardOrder = db.Column(db.Integer, autoincrement=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
@@ -16,4 +17,4 @@ class Card(db.Model):
 
 class CardSchema(Schema):
     class Meta:
-        fields = ("cardId", "cardTitle", "categoryId")
+        fields = ("cardId", "cardTitle", "cardContent", "categoryId")

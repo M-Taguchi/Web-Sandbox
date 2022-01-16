@@ -17,15 +17,17 @@ import DeleteModal from "./molecules/modal/deleteModal";
 
 type BoardProps = {
   title?: string;
+  cards?: any;
 };
 
-const Board: React.FC<BoardProps> = ({ title }) => {
+const Board: React.FC<BoardProps> = ({ title, cards }) => {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
   const onOpenDeleteModal = () => setIsOpenDeleteModal(true);
   const onOpenCreateModal = () => setIsOpenCreateModal(true);
   const onCloseDeleteModal = () => setIsOpenDeleteModal(false);
   const onCloseCreateModal = () => setIsOpenCreateModal(false);
+
   return (
     <>
       {/* ボード */}
@@ -64,13 +66,15 @@ const Board: React.FC<BoardProps> = ({ title }) => {
               />
             )}
           </Heading>
-          <Card
-            header={"テストヘッダー"}
-            content={
-              "テスト内容1テスト内容1テスト内容1テスト内容1テスト内容1テスト内容1テスト内容1"
-            }
-          />
-          <Card header={"テストヘッダー2"} content={"テストテスト"} />
+          {cards.map((card: any, index: number) => {
+            return (
+              <Card
+                key={index}
+                header={card.cardTitle}
+                content={card.cardContent}
+              />
+            );
+          })}
           <Button
             colorScheme={"teal"}
             leftIcon={<Icon icon={MdAdd} />}

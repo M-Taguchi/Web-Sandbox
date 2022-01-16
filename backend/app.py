@@ -9,6 +9,7 @@ from api.Categorys.categorys import CategorysApi
 from api.Categorys.category import CategoryApi
 from api.Cards.cards import CardsApi
 from api.Cards.card import CardApi
+from api.Kanban.kanban import KanbanApi
 from flask_cors import CORS # デプロイ時にコメント化
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -48,3 +49,4 @@ api.add_resource(CategorysApi, "/api/categorys/")
 api.add_resource(CategoryApi, "/api/categorys/<int:categoryId>")
 api.add_resource(CardsApi, "/api/cards/")
 api.add_resource(CardApi, "/api/cards/<int:cardId>")
+api.add_resource(KanbanApi, "/api/kanban/")

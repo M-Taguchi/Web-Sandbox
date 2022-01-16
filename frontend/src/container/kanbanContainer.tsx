@@ -11,8 +11,8 @@ const KanbanContainer: React.FC = () => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const response: any = _get("/categorys").read();
-  const categorys = response[1].categorys;
+  const response: any = _get("/kanban").read();
+  const categorys = response[1].kanban;
 
   const props = {
     categorys,

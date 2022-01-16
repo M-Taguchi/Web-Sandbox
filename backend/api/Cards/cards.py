@@ -25,7 +25,7 @@ class CardsApi(Resource):
     """
     payload = request.json["card"]
     # レコードの登録
-    card = Card(cardTitle=payload["cardTitle"], categoryId=payload["categoryId"])
+    card = Card(cardTitle=payload["cardTitle"], cardContent=payload["catdContent"], categoryId=payload["categoryId"])
     db.session.add(card)
     db.session.commit()
 
@@ -43,6 +43,7 @@ class CardsApi(Resource):
       if not card:
         abort(404)
       card.cardTitle = payload["cardTitle"]
+      card.cardContent = payload["cardContent"]
       card.categoryId = payload["categoryId"]
       card.cardOrder = payload["cardOrder"]
       db.session.commit()

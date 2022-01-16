@@ -27,6 +27,7 @@ class CardApi(Resource):
     # レコードの更新 オブジェクトの値を更新してcommit
     payload = Card.request.json["card"]
     card.cardTitle = payload["cardTitle"]
+    card.cardContent = payload["cardContent"]
     card.categoryId = payload["categoryId"]
     card.cardOrder = payload["cardOrder"]
     db.session.commit()

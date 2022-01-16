@@ -32,5 +32,5 @@ def card_create():
     # テストデータ
     from data.card import cards
     for card in cards:
-        c = Card(cardTitle=card["cardTitle"], categoryId=card["categoryId"])
+        c = Card(cardTitle=card["cardTitle"], cardContent=card["cardContent"], categoryId=card["categoryId"])
         db.session.add(c)

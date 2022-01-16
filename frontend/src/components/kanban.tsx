@@ -9,7 +9,13 @@ const Kanban: React.FC<KanbanProps> = ({ categorys }) => {
   return (
     <Flex>
       {categorys.map((category: any, index: number) => {
-        return <Board key={index} title={category.categoryName} />;
+        return (
+          <Board
+            key={index}
+            title={category.categoryName}
+            cards={category.cards}
+          />
+        );
       })}
     </Flex>
   );
