@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdAdd, MdClose } from "react-icons/md";
+import { CardProps } from "../types/card";
 import Card from "./atoms/Card";
 import FormTextField from "./atoms/FormTextField";
 import Icon from "./atoms/Icon";
@@ -17,7 +18,7 @@ import DeleteModal from "./molecules/modal/deleteModal";
 
 type BoardProps = {
   title?: string;
-  cards?: any;
+  cards?: Array<CardProps>;
 };
 
 const Board: React.FC<BoardProps> = ({ title, cards }) => {
@@ -66,15 +67,16 @@ const Board: React.FC<BoardProps> = ({ title, cards }) => {
               />
             )}
           </Heading>
-          {cards.map((card: any, index: number) => {
-            return (
-              <Card
-                key={index}
-                header={card.cardTitle}
-                content={card.cardContent}
-              />
-            );
-          })}
+          {cards &&
+            cards.map((card: CardProps, index: number) => {
+              return (
+                <Card
+                  key={index}
+                  header={card.cardTitle}
+                  content={card.cardContent}
+                />
+              );
+            })}
           <Button
             colorScheme={"teal"}
             leftIcon={<Icon icon={MdAdd} />}

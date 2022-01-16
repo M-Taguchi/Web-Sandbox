@@ -1,14 +1,15 @@
 import { Flex } from "@chakra-ui/react";
+import { Category } from "../types/category";
 import Board from "./board";
 
 type KanbanProps = {
-  categorys: any;
+  categorys: Array<Category>;
 };
 
 const Kanban: React.FC<KanbanProps> = ({ categorys }) => {
   return (
     <Flex>
-      {categorys.map((category: any, index: number) => {
+      {categorys.map((category: Category, index: number) => {
         return (
           <Board
             key={index}
