@@ -6,7 +6,7 @@ from flask_restful import Api, Resource, reqparse
 categorySchema = CategorySchema(many=False)
 
 class CategoryApi(Resource):
-  def get(self, userId):
+  def get(self, categoryId):
     """
     カテゴリを1件取得
     """
@@ -27,7 +27,7 @@ class CategoryApi(Resource):
     # レコードの更新 オブジェクトの値を更新してcommit
     payload = Category.request.json["category"]
     category.categoryName = payload["categoryName"]
-    category.order = payload["order"]
+    category.categoryOrder = payload["categoryOrder"]
     db.session.commit()
 
     return jsonify({"status": "success","body": {"category" : categorySchema.dump(category)}})

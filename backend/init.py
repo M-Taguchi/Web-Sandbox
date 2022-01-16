@@ -1,5 +1,6 @@
 from models.user  import User
 from models.category  import Category
+from models.card  import Card
 from database import db
 
 def create_init(app):
@@ -8,6 +9,8 @@ def create_init(app):
         db.create_all()
         user_create()
         category_create()
+        db.session.commit()
+        card_create()
         db.session.commit()
     
 def user_create():
@@ -23,4 +26,11 @@ def category_create():
     from data.category import categorys
     for category in categorys:
         c = Category(categoryName=category["categoryName"])
+        db.session.add(c)
+
+def card_create():
+    # テストデータ
+    from data.card import cards
+    for card in cards:
+        c = Card(cardTitle=card["cardTitle"], categoryId=card["categoryId"])
         db.session.add(c)

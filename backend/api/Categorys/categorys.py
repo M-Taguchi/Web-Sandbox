@@ -11,7 +11,7 @@ class CategorysApi(Resource):
     """
     カテゴリを全件取得
     """
-    categorys = Category.query.order_by(desc("order"))
+    categorys = Category.query.order_by(desc("categoryOrder"))
     if categorys:
         return jsonify({"status": "success", "body": {"categorys" : categorySchema.dump(categorys)}})
     else:
@@ -41,7 +41,7 @@ class CategorysApi(Resource):
       if not category:
         abort(404)
       category.categoryName = payload["categoryName"]
-      category.order = payload["order"]
+      category.categoryOrder = payload["categoryOrder"]
       db.session.commit()
 
     return jsonify({"status": "success","body": {}})
