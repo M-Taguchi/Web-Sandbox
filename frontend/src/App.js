@@ -1,6 +1,6 @@
 import "./App.css";
 import { ChakraProvider, Box } from "@chakra-ui/react";
-import TestContainer from "./container/testContainer";
+import KanbanContainer from "./container/kanbanContainer";
 import AuthContainer from "./container/loginContainer";
 import { Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -20,7 +20,7 @@ function App() {
               <Routes>
                 <Route path="/login" element={<AuthContainer />} />
                 <Route path="/" element={<PrivateRoute />}>
-                  <Route path="/" element={<TestContainer />} />
+                  <Route path="/" element={<KanbanContainer />} />
                 </Route>
                 <Route path="*" element={<p>Not Found</p>} />
               </Routes>

@@ -6,27 +6,20 @@ import {
   Text,
   Heading,
   CloseButton,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdAdd, MdClose } from "react-icons/md";
-import { User } from "../types/user";
 import Card from "./atoms/Card";
 import FormTextField from "./atoms/FormTextField";
 import Icon from "./atoms/Icon";
+import CreateModal from "./molecules/modal/createModal";
+import DeleteModal from "./molecules/modal/deleteModal";
 
 type BoardProps = {
-  user: User;
-  handleJwtTest: () => void;
+  title?: string;
 };
 
-const Board: React.FC = () => {
+const Board: React.FC<BoardProps> = ({ title }) => {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
   const onOpenDeleteModal = () => setIsOpenDeleteModal(true);
@@ -48,50 +41,27 @@ const Board: React.FC = () => {
         <VStack spacing={2}>
           <Heading w={"100%"} pl={2}>
             <Flex justifyContent={"space-between"} alignItems={"center"}>
-              <Text>Todo</Text>
-              <CloseButton variant={"ghost"} onClick={onOpenDeleteModal}>
+              <Text>{title}</Text>
+              <CloseButton onClick={onOpenDeleteModal}>
                 <Icon icon={MdClose} />
               </CloseButton>
             </Flex>
             {isOpenDeleteModal && (
-              <>
-                {/* 削除モーダル */}
-                {/* TODO: コンポーネント切り出し */}
-                <Modal isOpen={isOpenDeleteModal} onClose={onCloseDeleteModal}>
-                  <ModalOverlay />
-                  <ModalContent minH={60}>
-                    <ModalHeader
-                      display={"flex"}
-                      justifyContent={"space-between"}
-                      p={4}
-                    >
-                      ボードの削除
-                      <CloseButton onClick={onCloseDeleteModal}>
-                        <Icon icon={MdClose} />
-                      </CloseButton>
-                    </ModalHeader>
-
-                    <ModalBody pt={0} pb={0}>
-                      <Text>
-                        選択されたボードを削除します。
-                        <br />
-                        削除されたボードは復元できません。
-                        <br />
-                        本当によろしいですか？
-                      </Text>
-                    </ModalBody>
-
-                    <ModalFooter
-                      display={"flex"}
-                      justifyContent={"space-between"}
-                      p={4}
-                    >
-                      <Button colorScheme={"red"}>削除</Button>
-                      <Button onClick={onCloseDeleteModal}>キャンセル</Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
-              </>
+              <DeleteModal
+                header={"ボードの削除"}
+                content={
+                  <Text>
+                    選択されたボードを削除します。
+                    <br />
+                    削除されたボードは復元できません。
+                    <br />
+                    本当によろしいですか？
+                  </Text>
+                }
+                isOpen={isOpenDeleteModal}
+                onClose={onCloseDeleteModal}
+                onSubmit={() => alert("削除！")}
+              />
             )}
           </Heading>
           <Card
@@ -109,47 +79,22 @@ const Board: React.FC = () => {
             新規追加
           </Button>
           {isOpenCreateModal && (
-            <>
-              {/* 作成モーダル */}
-              {/* TODO: コンポーネント切り出し */}
-              <Modal isOpen={isOpenCreateModal} onClose={onCloseCreateModal}>
-                <form onSubmit={() => alert("submit!")}>
-                  <ModalOverlay />
-                  <ModalContent minH={60}>
-                    <ModalHeader
-                      display={"flex"}
-                      justifyContent={"space-between"}
-                      p={4}
-                    >
-                      ボードの作成
-                      <CloseButton onClick={onCloseCreateModal}>
-                        <Icon icon={MdClose} />
-                      </CloseButton>
-                    </ModalHeader>
-
-                    <ModalBody pt={0} pb={0}>
-                      <FormTextField name={"header"} label={"ヘッダー"} />
-                      <FormTextField
-                        name={"content"}
-                        label={"内容"}
-                        multiple={true}
-                      />
-                    </ModalBody>
-
-                    <ModalFooter
-                      display={"flex"}
-                      justifyContent={"space-between"}
-                      p={4}
-                    >
-                      <Button colorScheme={"teal"} type={"submit"}>
-                        作成
-                      </Button>
-                      <Button onClick={onCloseCreateModal}>キャンセル</Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </form>
-              </Modal>
-            </>
+            <CreateModal
+              header={"ボードの作成"}
+              content={
+                <>
+                  <FormTextField name={"header"} label={"ヘッダー"} />
+                  <FormTextField
+                    name={"content"}
+                    label={"内容"}
+                    multiple={true}
+                  />
+                </>
+              }
+              isOpen={isOpenCreateModal}
+              onClose={onCloseCreateModal}
+              onSubmit={() => alert("作成！")}
+            />
           )}
         </VStack>
       </Box>

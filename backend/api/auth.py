@@ -20,14 +20,14 @@ class AuthLoginApi(Resource):
   ログイン
   """
   def post(self):
-    input_data = request.json
-    user = User.query.filter_by(userName=input_data["userName"]).first()
+    payload = request.json
+    user = User.query.filter_by(userName=payload["userName"]).first()
 
-    if not user or not user.check_password(input_data["password"]):
+    if not user or not user.check_password(payload["password"]):
       return jsonify({"status": "failure", "code": 401, "message" : "IDまたはパスワードに誤りがあります", "body": {}})
 
     # JWTの発行
-    access_token = create_access_token(user.id)
+    access_token = create_access_token(user.userId)
     # リフレッシュトークンの保持
     # refresh_token = create_refresh_token(user.id)
 

@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class User(db.Model):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.Integer, primary_key=True)
     userName = db.Column(db.String(128), nullable=False)
     password = db.Column(db.String(128), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
@@ -22,4 +22,4 @@ class User(db.Model):
 
 class UserSchema(Schema):
     class Meta:
-        fields = ("id", "userName")
+        fields = ("userId", "userName")

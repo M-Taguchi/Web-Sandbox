@@ -13,7 +13,7 @@ const Test: React.FC<TestProps> = ({ user, handleJwtTest }) => {
         <VStack spacing={8}>
           <p>Hello, React!</p>
           <p>{user.userName}さん、こんにちは</p>
-          <p>IDは{user.id}です</p>
+          <p>IDは{user.userId}です</p>
           <Button mt={4} colorScheme="red" onClick={handleJwtTest}>
             JWTテスト
           </Button>
