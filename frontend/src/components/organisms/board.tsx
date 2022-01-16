@@ -9,12 +9,12 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdAdd, MdClose } from "react-icons/md";
-import { CardProps } from "../types/card";
-import Card from "./atoms/Card";
-import FormTextField from "./atoms/FormTextField";
-import Icon from "./atoms/Icon";
-import CreateModal from "./molecules/modal/createModal";
-import DeleteModal from "./molecules/modal/deleteModal";
+import { CardProps } from "../../types/card";
+import Card from "../atoms/Card";
+import FormTextField from "../atoms/FormTextField";
+import Icon from "../atoms/Icon";
+import CreateModal from "../molecules/modal/createModal";
+import DeleteModal from "../molecules/modal/deleteModal";
 
 type BoardProps = {
   title?: string;

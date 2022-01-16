@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useInternalApi } from "../hooks/useInternalApi";
+import { useInternalApi } from "../../hooks/useInternalApi";
 import { Flex, HStack, useToast } from "@chakra-ui/react";
-import Board from "../components/board";
+import Board from "../../components/organisms/board";
 import { useForm, FormProvider } from "react-hook-form";
-import Kanban from "../components/kanban";
+import Kanban from "../../components/pages/kanban";
 
 const KanbanContainer: React.FC = () => {
   const methods = useForm();

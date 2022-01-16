@@ -17,7 +17,7 @@ import {
 import { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { MdClose, MdHome, MdLogout, MdMenu, MdSearch } from "react-icons/md";
-import Icon from "./atoms/Icon";
+import Icon from "../atoms/Icon";
 
 type AppbarProps = {
   handleLogout: () => void;

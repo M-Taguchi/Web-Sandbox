@@ -1,7 +1,7 @@
 import { Box, Button, Heading, Flex, Stack } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
-import FormTextField from "./atoms/FormTextField";
-import FormPasswordField from "./atoms/FormPasswordField";
+import FormTextField from "../atoms/FormTextField";
+import FormPasswordField from "../atoms/FormPasswordField";
 
 type LoginProps = {
   handleLogin: () => void;

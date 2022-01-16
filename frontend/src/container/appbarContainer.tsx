@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import Appbar from "../components/appbar";
+import Appbar from "../components/organisms/appbar";
 import { useInternalApi } from "../hooks/useInternalApi";
 
 const AppbarContainer: React.FC = () => {

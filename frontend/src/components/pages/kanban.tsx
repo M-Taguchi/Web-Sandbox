@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import { Category } from "../types/category";
-import Board from "./board";
+import { Category } from "../../types/category";
+import Board from "../organisms/board";
 
 type KanbanProps = {
   categorys: Array<Category>;

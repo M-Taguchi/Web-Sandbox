@@ -1,7 +1,7 @@
 import "./App.css";
 import { ChakraProvider, Box } from "@chakra-ui/react";
-import KanbanContainer from "./container/kanbanContainer";
-import AuthContainer from "./container/loginContainer";
+import KanbanContainer from "./container/kanban/kanbanContainer";
+import AuthContainer from "./container/login/loginContainer";
 import { Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./container/auth/privateRoute";

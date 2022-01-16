@@ -1,9 +1,9 @@
 import { useToast } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Login from "../components/login";
-import { useAuth } from "../hooks/useAuth";
-import { useInternalApi } from "../hooks/useInternalApi";
+import Login from "../../components/pages/login";
+import { useAuth } from "../../hooks/useAuth";
+import { useInternalApi } from "../../hooks/useInternalApi";
 
 const LoginContainer: React.FC = () => {
   const methods = useForm();
