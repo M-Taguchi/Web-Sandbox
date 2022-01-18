@@ -4,16 +4,17 @@ import { Flex, HStack, useToast } from "@chakra-ui/react";
 import Board from "../../components/organisms/board";
 import { useForm, FormProvider } from "react-hook-form";
 import Kanban from "../../components/pages/kanban";
+import { useEffect, useState } from "react";
+import { CardResponse } from "../../types/card";
 
 const KanbanContainer: React.FC = () => {
   const methods = useForm();
-  const { _post, _get } = useInternalApi();
+  const { _post, _get, _delete } = useInternalApi();
   const { handleSubmit } = methods;
   const navigate = useNavigate();
   const toast = useToast();
 
-  const response: any = _get("/kanban/").read();
-  const categorys = response[1].kanban;
+  const [categorys, setCategorys] = useState(_get("/kanban/").read()[1].kanban);
 
   const handleCreateCard = handleSubmit((data) => {
     const request = {
@@ -29,9 +30,10 @@ const KanbanContainer: React.FC = () => {
           status: "success",
           isClosable: true,
         });
-        // TODO:遷移先の変更
-        navigate("/");
-        // TODO:表示の更新処理
+
+        let update = [...categorys];
+        update[response[1].card.categoryId - 1].cards.push(response[1].card);
+        setCategorys(update);
       })
       .catch(() => {
         toast({
@@ -43,10 +45,36 @@ const KanbanContainer: React.FC = () => {
       });
   });
 
+  const handleDeleteCard = (cardId: number) => {
+    console.log(cardId);
+    _delete(`/cards/${cardId}`)
+      .then((response: any) => {
+        toast({
+          title: "カードを削除しました",
+          position: "top",
+          status: "success",
+          isClosable: true,
+        });
+
+        // let update = [...categorys];
+        // update[response[1].card.categoryId - 1].cards.push(response[1].card);
+        // setCategorys(update);
+      })
+      .catch(() => {
+        toast({
+          title: "カード削除に失敗しました",
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+      });
+  };
+
   const props = {
     categorys,
     handlers: {
       handleCreateCard,
+      handleDeleteCard,
     },
   };
 

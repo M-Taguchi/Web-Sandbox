@@ -6,6 +6,7 @@ type KanbanProps = {
   categorys: Array<Category>;
   handlers: {
     handleCreateCard: () => void;
+    handleDeleteCard: (cardId: number) => void;
   };
 };
 

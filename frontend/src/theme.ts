@@ -12,10 +12,10 @@ const theme = extendTheme({
           dialogContainer: {
             pointerEvents: "none",
           },
-			  },
-		  },
-	  },
-  }
+        },
+      },
+    },
+  },
 });
 
 export default theme;

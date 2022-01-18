@@ -23,6 +23,7 @@ type BoardProps = {
   categoryId: number;
   handlers: {
     handleCreateCard: () => void;
+    handleDeleteCard: (cardId: number) => void;
   };
 };
 
@@ -40,9 +41,9 @@ const Board: React.FC<BoardProps> = ({
   const onCloseDeleteModal = () => setIsOpenDeleteModal(false);
   const onCloseCreateModal = () => setIsOpenCreateModal(false);
 
-  const { handleCreateCard } = handlers;
+  const { handleCreateCard, handleDeleteCard } = handlers;
 
-  const { register } = useFormContext();
+  const { register, reset } = useFormContext();
 
   return (
     <>
@@ -89,6 +90,7 @@ const Board: React.FC<BoardProps> = ({
                   key={index}
                   header={card.cardTitle}
                   content={card.cardContent}
+                  handleDeleteCard={() => handleDeleteCard(card.cardId)}
                 />
               );
             })}
@@ -117,8 +119,15 @@ const Board: React.FC<BoardProps> = ({
                 </>
               }
               isOpen={isOpenCreateModal}
-              onClose={onCloseCreateModal}
-              onSubmit={handleCreateCard}
+              onClose={() => {
+                onCloseCreateModal();
+                reset();
+              }}
+              onSubmit={() => {
+                handleCreateCard();
+                onCloseCreateModal();
+                reset();
+              }}
             />
           )}
         </VStack>

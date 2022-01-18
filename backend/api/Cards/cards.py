@@ -4,7 +4,9 @@ from flask import jsonify, abort, request
 from flask_restful import Api, Resource, reqparse
 from sqlalchemy import desc
 
-cardSchema = CardSchema(many=True)
+cardsSchema = CardSchema(many=True)
+
+cardSchema = CardSchema(many=False)
 
 class CardsApi(Resource):
   def get(self):
@@ -15,7 +17,7 @@ class CardsApi(Resource):
     payload = request.json["card"]
     cards = Card.query.filter_by(categoryId=payload["categoryId"]).order_by(desc("cardOrder"))
     if cards:
-        return jsonify({"status": "success", "body": {"cards" : cardSchema.dump(cards)}})
+        return jsonify({"status": "success", "body": {"cards" : cardsSchema.dump(cards)}})
     else:
         abort(404)
 
@@ -29,7 +31,7 @@ class CardsApi(Resource):
     db.session.add(card)
     db.session.commit()
 
-    return jsonify({"status": "success","body": {}})
+    return jsonify({"status": "success","body": {"card": cardSchema.dump(card)}})
 
   def put(self):
     """

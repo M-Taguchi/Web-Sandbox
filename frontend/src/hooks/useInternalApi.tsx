@@ -7,11 +7,13 @@ type ApiContext = {
   // TODO: any修正
   _post: (url: string, data?: object, addHeaders?: object) => any;
   _get: (url: string, params?: object) => any;
+  _delete: (url: string, data?: object) => any;
 };
 
 const defaultContext: ApiContext = {
   _post: () => [],
   _get: () => [],
+  _delete: () => [],
 };
 
 const apiContext = createContext<ApiContext>(defaultContext);
@@ -74,8 +76,24 @@ export const ApiProvider: React.FC = ({ children }) => {
     return [response.data.status, response.data.body];
   };
 
+  const _delete = async (url: string, data?: object) => {
+    const response = await axios
+      .delete<BaseResponse>(url, { data: data })
+      .catch((e: any) => {
+        console.log("エラー");
+        throw error;
+      });
+
+    // if (response.data.code !== 200) {
+    //   console.log("エラー");
+    //   throw error;
+    // }
+
+    return [response.data.status, response.data.body];
+  };
+
   return (
-    <apiContext.Provider value={{ _post, _get }}>
+    <apiContext.Provider value={{ _post, _get, _delete }}>
       {children}
     </apiContext.Provider>
   );
