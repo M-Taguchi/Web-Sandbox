@@ -1,5 +1,5 @@
 from os import access
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from flask_jwt_extended.utils import create_access_token, create_refresh_token, get_csrf_token, get_jwt_identity, set_access_cookies, set_refresh_cookies, unset_jwt_cookies
 from flask_jwt_extended.view_decorators import jwt_required
 from flask_restful import Resource
@@ -24,7 +24,7 @@ class AuthLoginApi(Resource):
     user = User.query.filter_by(userName=payload["userName"]).first()
 
     if not user or not user.check_password(payload["password"]):
-      return jsonify({"status": "failure", "code": 401, "message" : "IDまたはパスワードに誤りがあります", "body": {}})
+      return abort(401)
 
     # JWTの発行
     access_token = create_access_token(user.userId)
