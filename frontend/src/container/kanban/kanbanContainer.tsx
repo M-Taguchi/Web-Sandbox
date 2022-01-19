@@ -6,6 +6,9 @@ import { useForm, FormProvider } from "react-hook-form";
 import Kanban from "../../components/pages/kanban";
 import { useEffect, useState } from "react";
 import { CardResponse } from "../../types/card";
+import axios from "axios";
+import { url } from "inspector";
+import { mutate } from "swr";
 
 const KanbanContainer: React.FC = () => {
   const methods = useForm();
@@ -14,7 +17,13 @@ const KanbanContainer: React.FC = () => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const [categorys, setCategorys] = useState(_get("/kanban/").read()[1].kanban);
+  const { data, fetch } = _get("/kanban/");
+
+  const [categorys, setCategorys] = useState(data.kanban);
+
+  useEffect(() => {
+    setCategorys(data.kanban);
+  }, [data]);
 
   const handleCreateCard = handleSubmit((data) => {
     const request = {
@@ -31,9 +40,7 @@ const KanbanContainer: React.FC = () => {
           isClosable: true,
         });
 
-        let update = [...categorys];
-        update[response[1].card.categoryId - 1].cards.push(response[1].card);
-        setCategorys(update);
+        fetch();
       })
       .catch(() => {
         toast({
@@ -56,9 +63,7 @@ const KanbanContainer: React.FC = () => {
           isClosable: true,
         });
 
-        // let update = [...categorys];
-        // update[response[1].card.categoryId - 1].cards.push(response[1].card);
-        // setCategorys(update);
+        fetch();
       })
       .catch(() => {
         toast({

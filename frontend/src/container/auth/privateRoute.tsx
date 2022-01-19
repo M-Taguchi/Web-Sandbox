@@ -13,12 +13,7 @@ const PrivateRoute: React.FC = () => {
   useEffect(() => {
     const jwtCheck = () =>
       _post("/auth")
-        .then((response: any) => {
-          console.log(response);
-          setIsLoading(false);
-        })
         .catch(() => {
-          setIsLoading(false);
           navigate("/login");
         })
         .finally(() => {

@@ -17,8 +17,8 @@ const LoginContainer: React.FC = () => {
   const handleLogin = handleSubmit((data) =>
     _post("/auth/login", data)
       .then((response: any) => {
-        setJwtCsrf(response[1].accessCsrf);
-        localStorage.setItem("accessCsrf", response[1].accessCsrf);
+        setJwtCsrf(response.accessCsrf);
+        localStorage.setItem("accessCsrf", response.accessCsrf);
         toast({
           title: "ログインしました",
           position: "top",
@@ -41,7 +41,7 @@ const LoginContainer: React.FC = () => {
   const handleJWTTest = () =>
     _post("/auth")
       .then((response: any) => {
-        console.log(response);
+        // console.log(response);
       })
       .catch(() => {
         navigate("/login");
