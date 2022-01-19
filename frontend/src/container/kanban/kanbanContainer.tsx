@@ -53,7 +53,6 @@ const KanbanContainer: React.FC = () => {
   });
 
   const handleDeleteCard = (cardId: number) => {
-    console.log(cardId);
     _delete(`/cards/${cardId}`)
       .then((response: any) => {
         toast({
