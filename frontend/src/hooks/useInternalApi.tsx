@@ -20,8 +20,13 @@ const defaultContext: ApiContext = {
 const apiContext = createContext<ApiContext>(defaultContext);
 
 // TODO: 以下のaxiosの設定を環境変数に変更
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:5000/api";
+if (process.env.NODE_ENV === "development") {
+  axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = process.env.REACT_APP_DEV_API_URL;
+} else {
+  axios.defaults.withCredentials = false;
+  axios.defaults.baseURL = process.env.REACT_APP_PROD_API_URL;
+}
 
 export const ApiProvider: React.FC = ({ children }) => {
   const { jwtCsrf } = useAuth();

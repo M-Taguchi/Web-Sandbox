@@ -17,6 +17,7 @@ from flask_marshmallow import Marshmallow
 from database import init_db
 from init import create_init
 from api.token import jwt_init
+from config import Config
 
 app = Flask(__name__, static_url_path="", static_folder="frontend/build")
 
@@ -24,7 +25,8 @@ app = Flask(__name__, static_url_path="", static_folder="frontend/build")
 app.config.from_object("config.Config")
 
 # CORS対策(デプロイ時にコメント化)
-CORS(app,resources={"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
+if Config.ENV == "development":
+    CORS(app,resources={"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
 
 # DB初期化
 init_db(app)
