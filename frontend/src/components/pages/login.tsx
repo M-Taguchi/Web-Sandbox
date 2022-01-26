@@ -5,10 +5,9 @@ import FormPasswordField from "../atoms/FormPasswordField";
 
 type LoginProps = {
   handleLogin: () => void;
-  handleJWTTest: () => void;
 };
 
-const Login: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
+const Login: React.FC<LoginProps> = ({ handleLogin }) => {
   const {
     formState: { isSubmitting },
   } = useFormContext();
@@ -47,9 +46,6 @@ const Login: React.FC<LoginProps> = ({ handleLogin, handleJWTTest }) => {
                 type="submit"
               >
                 ログイン
-              </Button>
-              <Button mt={4} colorScheme="red" onClick={handleJWTTest}>
-                JWTテスト
               </Button>
             </form>
           </Stack>

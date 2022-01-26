@@ -38,16 +38,7 @@ const LoginContainer: React.FC = () => {
       })
   );
 
-  const handleJWTTest = () =>
-    _post("/auth")
-      .then((response: any) => {
-        // console.log(response);
-      })
-      .catch(() => {
-        navigate("/login");
-      });
-
-  const props = { handleLogin, handleJWTTest };
+  const props = { handleLogin };
 
   return (
     <>
