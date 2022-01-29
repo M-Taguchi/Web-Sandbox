@@ -64,4 +64,4 @@ class ProdConfig:
     # 二重送信対策
     JWT_CSRF_IN_COOKIES = True
 
-Config = DevConfig
+Config = ProdConfig
