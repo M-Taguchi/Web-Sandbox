@@ -29,10 +29,10 @@ if Config.ENV == "development":
     CORS(app,resources={"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
 
 # DB初期化
-init_db(app)
-api = Api(app)
-ma = Marshmallow(app)
-create_init(app)
+# init_db(app)
+# api = Api(app)
+# ma = Marshmallow(app)
+# create_init(app)
 
 # JWT初期化
 jwt_init(app)
