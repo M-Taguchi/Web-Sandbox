@@ -10,11 +10,11 @@ def create_init(app):
         # db.session.commit()
         # db.drop_all()
         db.create_all()
-        user_create()
-        category_create()
-        db.session.commit()
-        card_create()
-        db.session.commit()
+        # user_create()
+        # category_create()
+        # db.session.commit()
+        # card_create()
+        # db.session.commit()
     
 def user_create():
     # テストデータ
