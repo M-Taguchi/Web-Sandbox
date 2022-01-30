@@ -7,6 +7,7 @@ def create_init(app):
     with app.app_context():
         for table in db.metadata.sorted_tables:
             db.session.execute(table.delete())
+        db.session.commit()
         # db.drop_all()
         db.create_all()
         user_create()
