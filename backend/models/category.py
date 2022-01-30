@@ -15,7 +15,7 @@ class Category(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
 
-    cards = db.relationship("Card", backref="categorys")
+    cards = db.relationship("Card", backref="categorys", cascade="all")
 
 class CategorySchema(Schema):
     class Meta:

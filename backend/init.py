@@ -5,8 +5,9 @@ from database import db
 
 def create_init(app):
     with app.app_context():
-        for table in db.metadata.sorted_tables:
-            table.delete()
+        # for table in db.metadata.sorted_tables:
+        #     db.session.execute(table.delete())
+        db.drop_all()
         db.session.commit()
         db.create_all()
         user_create()
