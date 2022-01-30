@@ -26,6 +26,8 @@ class AuthLoginApi(Resource):
     if not user or not user.check_password(payload["password"]):
       return abort(401)
 
+    print(user)
+
     # JWTの発行
     access_token = create_access_token(user.userId)
     # リフレッシュトークンの保持

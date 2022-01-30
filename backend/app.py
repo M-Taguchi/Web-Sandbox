@@ -32,7 +32,7 @@ if Config.ENV == "development":
 init_db(app)
 api = Api(app)
 ma = Marshmallow(app)
-create_init(app)
+# create_init(app)
 
 # JWT初期化
 jwt_init(app)
