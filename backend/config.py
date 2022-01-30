@@ -58,7 +58,7 @@ class ProdConfig:
     # GET以外のときにCSRFトークンチェックを行うか
     JWT_COOKIE_CSRF_PROTECT = True
     # JWT署名鍵
-    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", b"ChangeMe"),
+    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", b"ChangeMe")
     # CSRF対策
     JWT_COOKIE_SAMESITE = "Strict"
     # 二重送信対策
