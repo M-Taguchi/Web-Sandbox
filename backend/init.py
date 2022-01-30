@@ -14,7 +14,7 @@ def create_init(app):
         category_create()
         # db.session.commit()
         card_create()
-        db.session.commit()
+        # db.session.commit()
     
 def user_create():
     # テストデータ
