@@ -19,7 +19,7 @@ from init import create_init
 from api.token import jwt_init
 from config import Config
 
-app = Flask(__name__, static_url_path="", static_folder="frontend/build")
+app = Flask(__name__, static_url_path="", static_folder="../frontend/build")
 
 # 設定読み込み
 app.config.from_object("config.Config")
