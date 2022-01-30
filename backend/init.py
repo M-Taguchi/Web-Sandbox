@@ -8,7 +8,6 @@ def create_init(app):
         # for table in db.metadata.sorted_tables:
         #     db.session.execute(table.delete())
         db.drop_all()
-        db.session.commit()
         db.create_all()
         user_create()
         category_create()
