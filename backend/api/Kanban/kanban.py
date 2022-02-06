@@ -4,10 +4,12 @@ from models.card import Card
 from flask import jsonify, abort, request
 from flask_restful import Api, Resource, reqparse
 from sqlalchemy import desc
+from flask_jwt_extended.view_decorators import jwt_required
 
 kanbanSchema = KanbanSchema(many=True)
 
 class KanbanApi(Resource):
+  @jwt_required()
   def get(self):
     """
     カンバンボードのカテゴリとカードを全件取得

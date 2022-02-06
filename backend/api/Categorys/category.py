@@ -2,10 +2,12 @@ from database import db
 from models.category import Category, CategorySchema
 from flask import jsonify, abort, request
 from flask_restful import Api, Resource, reqparse
+from flask_jwt_extended.view_decorators import jwt_required
 
 categorySchema = CategorySchema(many=False)
 
 class CategoryApi(Resource):
+  @jwt_required()
   def get(self, categoryId):
     """
     カテゴリを1件取得
@@ -16,6 +18,7 @@ class CategoryApi(Resource):
     else:
         abort(404)
 
+  @jwt_required()
   def put(self, categoryId):
     """
     カテゴリ編集
@@ -32,6 +35,7 @@ class CategoryApi(Resource):
 
     return jsonify({"status": "success","body": {"category" : categorySchema.dump(category)}})
 
+  @jwt_required()
   def delete(self, categoryId):
     """
     カテゴリ削除

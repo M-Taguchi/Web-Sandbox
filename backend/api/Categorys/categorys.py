@@ -3,10 +3,12 @@ from models.category import Category, CategorySchema
 from flask import jsonify, abort, request
 from flask_restful import Api, Resource, reqparse
 from sqlalchemy import desc
+from flask_jwt_extended.view_decorators import jwt_required
 
 categorySchema = CategorySchema(many=True)
 
 class CategorysApi(Resource):
+  @jwt_required()
   def get(self):
     """
     カテゴリを全件取得
@@ -17,6 +19,7 @@ class CategorysApi(Resource):
     else:
         abort(404)
 
+  @jwt_required()
   def post(self):
     """
     カテゴリ登録
@@ -29,6 +32,7 @@ class CategorysApi(Resource):
 
     return jsonify({"status": "success","body": {}})
 
+  @jwt_required()
   def put(self):
     """
     カテゴリの一括編集

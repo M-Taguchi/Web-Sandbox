@@ -3,12 +3,14 @@ from models.card import Card, CardSchema
 from flask import jsonify, abort, request
 from flask_restful import Api, Resource, reqparse
 from sqlalchemy import desc
+from flask_jwt_extended.view_decorators import jwt_required
 
 cardsSchema = CardSchema(many=True)
 
 cardSchema = CardSchema(many=False)
 
 class CardsApi(Resource):
+  @jwt_required()
   def get(self):
     """
     カードを全件取得
@@ -21,6 +23,7 @@ class CardsApi(Resource):
     else:
         abort(404)
 
+  @jwt_required()
   def post(self):
     """
     カード登録
@@ -33,6 +36,7 @@ class CardsApi(Resource):
 
     return jsonify({"status": "success","body": {"card": cardSchema.dump(card)}})
 
+  @jwt_required()
   def put(self):
     """
     カードの一括編集

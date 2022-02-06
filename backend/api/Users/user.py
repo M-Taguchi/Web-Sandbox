@@ -2,10 +2,12 @@ from database import db
 from models.user import User, UserSchema
 from flask import jsonify, abort, request
 from flask_restful import Api, Resource, reqparse
+from flask_jwt_extended.view_decorators import jwt_required
 
 userSchema = UserSchema(many=False)
 
 class UserApi(Resource):
+  @jwt_required()
   def get(self, userId):
     """
     ユーザを1件取得
@@ -16,6 +18,7 @@ class UserApi(Resource):
     else:
         abort(404)
 
+  @jwt_required()
   def put(self, userId):
     """
     ユーザ編集
@@ -32,6 +35,7 @@ class UserApi(Resource):
 
     return jsonify({"status": "success","body": {"user" : userSchema.dump(user)}})
 
+  @jwt_required()
   def delete(self, userId):
     """
     ユーザ削除
