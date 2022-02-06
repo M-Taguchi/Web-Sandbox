@@ -33,7 +33,9 @@ export const ApiProvider: React.FC = ({ children }) => {
 
   const _get = (url: string, params?: object) => {
     const fetcher = () =>
-      axios.get(url, { params: params }).then((res) => res.data.body);
+      axios.get(url, { params: params, headers: {
+        "X-CSRF-TOKEN": jwtCsrf,
+      }, }).then((res) => res.data.body);
 
     //@ts-ignore
     const { data, error, mutate } = useSWR(url, fetcher, { suspense: true });
@@ -62,7 +64,12 @@ export const ApiProvider: React.FC = ({ children }) => {
 
   const _delete = async (url: string, data?: object) => {
     const response = await axios
-      .delete<BaseResponse>(url, { data: data })
+      .delete<BaseResponse>(url, {
+        data: data,
+        headers: {
+          "X-CSRF-TOKEN": jwtCsrf,
+        },
+      })
       .catch((e: any) => {
         console.log("エラー");
         throw e;
