@@ -20,7 +20,7 @@ function App() {
               <Routes>
                 <Route path="/login" element={<AuthContainer />} />
                 <Route path="/" element={<PrivateRoute />}>
-                  <Route path="/" element={<KanbanContainer />} />
+                  <Route element={<KanbanContainer />} />
                 </Route>
                 <Route path="*" element={<p>Not Found</p>} />
               </Routes>
