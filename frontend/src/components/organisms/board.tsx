@@ -24,6 +24,7 @@ type BoardProps = {
   handlers: {
     handleCreateCard: () => void;
     handleDeleteCard: (cardId: number) => void;
+    handleDeleteCategory: (categoryId: number) => void;
   };
 };
 
@@ -41,7 +42,7 @@ const Board: React.FC<BoardProps> = ({
   const onCloseDeleteModal = () => setIsOpenDeleteModal(false);
   const onCloseCreateModal = () => setIsOpenCreateModal(false);
 
-  const { handleCreateCard, handleDeleteCard } = handlers;
+  const { handleCreateCard, handleDeleteCard, handleDeleteCategory } = handlers;
 
   const { register, reset } = useFormContext();
 
@@ -79,7 +80,13 @@ const Board: React.FC<BoardProps> = ({
                 }
                 isOpen={isOpenDeleteModal}
                 onClose={onCloseDeleteModal}
-                onSubmit={() => alert("削除！")}
+                onSubmit={() => {
+                  {
+                    handleDeleteCategory(categoryId);
+                    onCloseDeleteModal();
+                    reset();
+                  }
+                }}
               />
             )}
           </Heading>

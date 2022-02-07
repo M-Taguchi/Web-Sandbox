@@ -74,11 +74,34 @@ const KanbanContainer: React.FC = () => {
       });
   };
 
+  const handleDeleteCategory = (categoryId: number) => {
+    _delete(`/categorys/${categoryId}`)
+      .then((response: any) => {
+        toast({
+          title: "ボードを削除しました",
+          position: "top",
+          status: "success",
+          isClosable: true,
+        });
+
+        fetch();
+      })
+      .catch(() => {
+        toast({
+          title: "ボード削除に失敗しました",
+          position: "top",
+          status: "error",
+          isClosable: true,
+        });
+      });
+  };
+
   const props = {
     categorys,
     handlers: {
       handleCreateCard,
       handleDeleteCard,
+      handleDeleteCategory,
     },
   };
 

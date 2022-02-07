@@ -7,6 +7,7 @@ type KanbanProps = {
   handlers: {
     handleCreateCard: () => void;
     handleDeleteCard: (cardId: number) => void;
+    handleDeleteCategory: (boardId: number) => void;
   };
 };
 
