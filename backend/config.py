@@ -63,5 +63,7 @@ class ProdConfig:
     JWT_COOKIE_SAMESITE = "Strict"
     # 二重送信対策
     JWT_CSRF_IN_COOKIES = True
+    # JWTを適用するHTTPメソッド一覧
+    JWT_CSRF_METHODS = ["POST", "PUT", "PATCH", "DELETE", "GET"]
 
 Config = ProdConfig
