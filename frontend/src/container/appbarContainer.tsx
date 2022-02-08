@@ -6,16 +6,14 @@ import { useInternalApi } from "../hooks/useInternalApi";
 const AppbarContainer: React.FC = () => {
   const { _post } = useInternalApi();
   const navigate = useNavigate();
-  const toast = useToast();
+  const toast = useToast({ position: "top", isClosable: true });
 
   const handleLogout = () =>
     _post("/auth/logout", {}).then((response: any) => {
       localStorage.removeItem("accessCsrf");
       toast({
         title: "ログアウトしました",
-        position: "top",
         status: "success",
-        isClosable: true,
       });
       navigate("/login");
     });

@@ -15,7 +15,7 @@ const KanbanContainer: React.FC = () => {
   const { _post, _get, _delete } = useInternalApi();
   const { handleSubmit } = methods;
   const navigate = useNavigate();
-  const toast = useToast();
+  const toast = useToast({ position: "top", isClosable: true });
 
   const { data, fetch } = _get("/kanban/");
 
@@ -35,9 +35,7 @@ const KanbanContainer: React.FC = () => {
       .then((response: any) => {
         toast({
           title: "カードを作成しました",
-          position: "top",
           status: "success",
-          isClosable: true,
         });
 
         fetch();
@@ -45,9 +43,7 @@ const KanbanContainer: React.FC = () => {
       .catch(() => {
         toast({
           title: "カード作成に失敗しました",
-          position: "top",
           status: "error",
-          isClosable: true,
         });
       });
   });
@@ -57,9 +53,7 @@ const KanbanContainer: React.FC = () => {
       .then((response: any) => {
         toast({
           title: "カードを削除しました",
-          position: "top",
           status: "success",
-          isClosable: true,
         });
 
         fetch();
@@ -67,9 +61,7 @@ const KanbanContainer: React.FC = () => {
       .catch(() => {
         toast({
           title: "カード削除に失敗しました",
-          position: "top",
           status: "error",
-          isClosable: true,
         });
       });
   };
@@ -79,9 +71,7 @@ const KanbanContainer: React.FC = () => {
       .then((response: any) => {
         toast({
           title: "ボードを削除しました",
-          position: "top",
           status: "success",
-          isClosable: true,
         });
 
         fetch();
@@ -89,12 +79,33 @@ const KanbanContainer: React.FC = () => {
       .catch(() => {
         toast({
           title: "ボード削除に失敗しました",
-          position: "top",
           status: "error",
-          isClosable: true,
         });
       });
   };
+
+  const handleCreateCategory = handleSubmit((data) => {
+    const request = {
+      category: {
+        ...data,
+      },
+    };
+    _post("/categorys", request)
+      .then((response: any) => {
+        toast({
+          title: "ボードを作成しました",
+          status: "success",
+        });
+
+        fetch();
+      })
+      .catch(() => {
+        toast({
+          title: "ボード作成に失敗しました",
+          status: "error",
+        });
+      });
+  });
 
   const props = {
     categorys,
@@ -102,6 +113,7 @@ const KanbanContainer: React.FC = () => {
       handleCreateCard,
       handleDeleteCard,
       handleDeleteCategory,
+      handleCreateCategory,
     },
   };
 

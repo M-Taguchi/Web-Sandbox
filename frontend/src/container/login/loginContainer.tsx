@@ -11,7 +11,7 @@ const LoginContainer: React.FC = () => {
   const { setJwtCsrf } = useAuth();
   const { _post } = useInternalApi();
   const navigate = useNavigate();
-  const toast = useToast();
+  const toast = useToast({ position: "top", isClosable: true });
 
   // 認証系の処理を書く
   const handleLogin = handleSubmit((data) =>
@@ -21,9 +21,7 @@ const LoginContainer: React.FC = () => {
         localStorage.setItem("accessCsrf", response.accessCsrf);
         toast({
           title: "ログインしました",
-          position: "top",
           status: "success",
-          isClosable: true,
         });
         // TODO:遷移先の変更
         navigate("/");
@@ -31,9 +29,7 @@ const LoginContainer: React.FC = () => {
       .catch(() => {
         toast({
           title: "ログインに失敗しました",
-          position: "top",
           status: "error",
-          isClosable: true,
         });
       })
   );
